@@ -1,0 +1,13 @@
+:root {
+    --color-theme1: #01b2a8;
+    --color-theme2: #9b52e1;
+    --color-grey1: #d9d9d9;
+    --border-style: solid;
+    --border-color: var(--color-grey1);
+    --border-radius: 15px;
+    --border-width: 2px;
+    --border: var(--border-width) var(--border-style) var(--border-color) ;
+
+
+
+}

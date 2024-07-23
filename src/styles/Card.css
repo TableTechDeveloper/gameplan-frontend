@@ -1,0 +1,32 @@
+.card {
+    display: flex;
+    margin: 20px 0px 20px 0;
+    background-color: bisque;
+    justify-content: space-between;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    border-radius: var(--border-radius);
+    border: var(--border);
+    padding-left: 10px;
+}
+
+.game-image {
+    width: 150px;
+    height: 100px;
+    background-color: aqua;
+}
+
+.card button {
+    margin: 20px 0px 0px -10px;
+    font-size: 1rem;
+    padding: 0;
+    height: 40px;
+}
+
+.upcoming-event {
+    flex-direction: column;
+}
+
+.draft-event {
+    flex-direction: column;
+}
