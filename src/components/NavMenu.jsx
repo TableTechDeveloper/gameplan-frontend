@@ -14,9 +14,10 @@ const NavMenu = ({ isOpen, toggleMenu }) => {
         <NavLink to="/myevents" onClick={() => toggleMenu(false)}>My Events</NavLink>
         <NavLink to="/mydrafts" onClick={() => toggleMenu(false)}>My Drafts</NavLink>
         <NavLink to="/discoverevents" onClick={() => toggleMenu(false)}>Discover Events</NavLink>
+        <NavLink to="/eventpage" onClick={() => toggleMenu(false)}>Event Page</NavLink>
         <NavLink to="/" onClick={() => toggleMenu(false)}>Logout</NavLink>
         <button>
-        <NavLink to="/newevent" onClick={() => toggleMenu(false)}>New Event</NavLink>
+          <NavLink to="/newevent" onClick={() => toggleMenu(false)}>New Event</NavLink>
         </button>
       </div>
     </nav>

@@ -1,11 +1,12 @@
 .nav-menu {
+    width: 100%;
+    position: absolute;
+    top: 60px;
+    z-index: 1;
     display: flex;
     justify-content: space-between;
-    margin-top: 60px;
-    padding: 0px 20px;
     background-color: var(--color-grey1);
-    position: absolute;
-    width: 100%;
+    display: block;
     max-height: 0;
     overflow: hidden;
     opacity: 1.0;
@@ -13,7 +14,6 @@
 }
 
 .nav-menu.open {
-    padding: 10px 20px;
     opacity: 1.0;
     max-height: 100%;
 }

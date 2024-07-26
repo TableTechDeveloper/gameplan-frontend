@@ -1,5 +1,5 @@
+import React from 'react';
 import '../styles/Hamburger.css';
-
 
 const Hamburger = ({ isOpen, onClick }) => {
     
