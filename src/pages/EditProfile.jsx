@@ -31,8 +31,8 @@ const EditProfile = () => (
                 <input type="password" id="confirm-password" name="confirm-password" required />
             </div>
 
-            <button type="submit" className="filled-button">Save Changes</button>
-            <button type="reset" className="unfilled-button">Discard Changes</button>
+            <button  type="submit" className="button-primary">Save Changes</button>
+            <button type="reset" className="button-cancel">Discard Changes</button>
             
 
 

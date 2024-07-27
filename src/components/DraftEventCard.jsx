@@ -1,18 +1,21 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 import "../styles/Card.css"
 
 const DraftEventCard = () => {
     return (
         
-        <div className='card draft-event'>
+        <div className="card">
             <div>
                 <h3>Event Name</h3>
                 <p>Date and Time</p>
                 <p>Location</p>
+                <NavLink to="/newevent">
+                    <button className="button-secondary">Edit Event</button>
+                </NavLink>
+                <button className="button-cancel">Discard Event</button>
             </div>
             <div className='game-image'>image</div>
-            <button>Edit Event</button>
-            <button className="unfilled-button">Discard Event</button>
         </div>
 
     );

@@ -1,7 +1,11 @@
 :root {
     --color-theme1: #01b2a8;
+    --color-theme1-dark: #00514d;
     --color-theme2: #9b52e1;
+    --color-theme2-dark: #521d83;
+    --color-red: #b50000;
     --color-grey1: #d9d9d9;
+    --color-grey2: #636363;
     --border-style: solid;
     --border-color: var(--color-grey1);
     --border-radius: 15px;

@@ -49,10 +49,10 @@ const NewEvent = () => (
                 <span className="toggle-circle"></span>
             </div>
 
-            <button type="submit" className="filled-button">Save Changes</button>
-            <button type="submit" className="unfilled-button-green">Preview Event</button>
-            <button type="submit" className="unfilled-button-green">Save As Draft</button>
-            <button type="reset" className="unfilled-button">Discard Changes</button>
+            <button type="submit" className="button-primary">Save Changes</button>
+            <button type="submit" className="button-secondary">Preview Event</button>
+            <button type="submit" className="button-secondary">Save As Draft</button>
+            <button type="reset" className="button-cancel">Discard Changes</button>
 
         
         

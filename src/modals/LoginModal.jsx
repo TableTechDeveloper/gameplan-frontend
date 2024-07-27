@@ -21,10 +21,10 @@ const LoginModal = () => {
           Password:
           <input type="password" name="password" required />
         </label>
-        <button type="submit">Login</button>
+        <button className="button-primary" type="submit">Login</button>
       </form>
       <NavLink to="/dashboard">
-        <button onClick={handleGoToDashboardClick}>Go to Dashboard</button>
+        <button className="button-secondary" onClick={handleGoToDashboardClick}>Go to Dashboard</button>
       </NavLink>
     </div>
   );

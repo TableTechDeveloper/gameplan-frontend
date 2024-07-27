@@ -22,8 +22,8 @@ const HomeHeader = () => {
   return (
     <header className="home-header">
       <Logo />
-      <button onClick={handleLoginClick}>Login</button>
-      <button onClick={handleSignUpClick}>Signup</button>
+      <button id="login" onClick={handleLoginClick}>Login</button>
+      <button id="signup" onClick={handleSignUpClick}>Sign Up</button>
     </header>
   );
 };

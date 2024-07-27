@@ -25,10 +25,10 @@ const SignUpModal = () => {
           Confirm Password:
           <input type="password" name="confirmPassword" required />
         </label>
-        <button type="submit">Sign Up</button>
+        <button className="button-primary" type="submit">Sign Up</button>
       </form>
       <NavLink to="/dashboard">
-        <button onClick={handleGoToDashboardClick}>Go to Dashboard</button>
+        <button className="button-secondary" onClick={handleGoToDashboardClick}>Go to Dashboard</button>
       </NavLink>
     </div>
   );

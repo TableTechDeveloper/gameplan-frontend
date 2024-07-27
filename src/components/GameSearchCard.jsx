@@ -10,7 +10,7 @@ const GameSearchCard = () => {
                 <h4>Min-Players</h4>
                 <h4>Max-Players</h4>
                 <h4>Playtime</h4>
-                <button className="filled-button">Add Game</button>
+                <button className="button-primary">Add Game</button>
             </div>
             <div className='game-image'>image</div>
         </div>

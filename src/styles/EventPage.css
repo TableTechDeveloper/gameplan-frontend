@@ -1,0 +1,40 @@
+#profile-photo {
+    height: 60px;
+    width: 60px;
+    margin-right: 10px;
+    border-radius: 50px;
+    background-color: var(--color-theme1);
+}
+
+.event-header {
+    /* background-color: antiquewhite; */
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0px;
+}
+
+.event-details {
+    /* background-color: rgb(180, 180, 234); */
+    display: flex;
+    flex-direction: column;
+}
+
+.traffic-light {
+    height: 100px;
+    width: 100px;
+    border-radius: 50px;
+    background-color: var(--color-theme2);
+    text-align: center;
+}
+
+#host-details {
+    display: flex;
+    /* background-color: chartreuse; */
+}
+
+#eventpage-gameimage {
+    width: auto;
+    height: 200px;
+    margin: 20px 0px;
+    border-radius: 30px;
+}

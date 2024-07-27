@@ -6,7 +6,7 @@ const NavMenu = ({ isOpen, toggleMenu }) => {
   return (
     <nav className={`nav-menu ${isOpen ? 'open' : ''}`}>
       <div id="nav-links">
-        <NavLink to="/" onClick={() => toggleMenu(false)}>Home</NavLink>
+
         <NavLink to="/dashboard" onClick={() => toggleMenu(false)}>Dashboard</NavLink>
         <NavLink to="/editprofile" onClick={() => toggleMenu(false)}>Edit Profile</NavLink>
         <NavLink to="/gamesowned" onClick={() => toggleMenu(false)}>Games Owned</NavLink>
@@ -16,7 +16,7 @@ const NavMenu = ({ isOpen, toggleMenu }) => {
         <NavLink to="/discoverevents" onClick={() => toggleMenu(false)}>Discover Events</NavLink>
         <NavLink to="/eventpage" onClick={() => toggleMenu(false)}>Event Page</NavLink>
         <NavLink to="/" onClick={() => toggleMenu(false)}>Logout</NavLink>
-        <button>
+        <button className="button-primary">
           <NavLink to="/newevent" onClick={() => toggleMenu(false)}>New Event</NavLink>
         </button>
       </div>

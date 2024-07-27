@@ -1,19 +1,19 @@
+/* Card.css */
 .card {
     display: flex;
-    margin: 20px 0px 20px 0;
-    background-color: bisque;
+    align-items: stretch;
+    margin: 20px 0;
     justify-content: space-between;
     border-radius: var(--border-radius);
     overflow: hidden;
-    border-radius: var(--border-radius);
     border: var(--border);
     padding-left: 10px;
+    height: auto;
 }
 
 .game-image {
     width: 150px;
-    height: 100px;
-    background-color: aqua;
+    background-color: var(--color-grey1);
 }
 
 .card button {
@@ -21,12 +21,4 @@
     font-size: 1rem;
     padding: 0;
     height: 40px;
-}
-
-.upcoming-event {
-    flex-direction: column;
-}
-
-.draft-event {
-    flex-direction: column;
 }
