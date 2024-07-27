@@ -37,7 +37,6 @@ code {
 }
 
 section {
-  background-color: rgb(239, 237, 233);
   padding: 10px;
 }
 
@@ -45,7 +44,8 @@ button {
   border: none;
   border-radius: var(--border-radius);
   height: 60px;
-  min-width: 150px;
+  /* min-width: 150px;
+  width: 100%; */
   background-color: var(--color-theme1);
   font-size: 1.4rem;
   font-weight: 600;
@@ -57,6 +57,14 @@ button {
   background-color: #ffffff;
   color: var(--color-theme2);
   border-color: var(--color-theme2);
+  border-width: 3px;
+  border-style: solid;
+}
+
+.unfilled-button-green {
+  background-color: #ffffff;
+  color: var(--color-theme1);
+  border-color: var(--color-theme1);
   border-width: 3px;
   border-style: solid;
 }

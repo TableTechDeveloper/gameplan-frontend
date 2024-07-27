@@ -1,8 +1,25 @@
-.header {
-    width: 100%;
+.header, .home-header {
+    max-width: 100%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     flex-shrink: 0;
     position: relative;
-    background-color: rgb(228, 150, 198);
+    background-color: var(--color-grey1);
+    padding: 10px 20px 10px 20px;
+    height: 40px;
+
+}
+.logo {
+
+    background-color: var(--color-theme1);
+    height: 30px;
+}
+
+.logo h5 {
+    margin: 0;
+}
+
+.home-header button {
+    height: 30px;
 }

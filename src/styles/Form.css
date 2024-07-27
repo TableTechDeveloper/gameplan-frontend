@@ -2,14 +2,12 @@ form {
     display: flex;
     flex-direction: column;
     align-items: stretch;
-
 }
 
 form label {
     display: block;
     font-weight: 700;
     font-size: 1.4rem;
-    
 }
 
 form input {
@@ -20,8 +18,6 @@ form input {
     margin-top: 10px;
     font-size: 1.2rem;
     padding-left: 10px;
-    
-
 }
 
 .form-field {
@@ -29,7 +25,6 @@ form input {
     flex-direction: column;
     margin-top: 20px;
     width: 100%;
-
 }
 
 .profile-photo {
@@ -37,5 +32,40 @@ form input {
     width: 100px;
     border-radius: 50px;
     background-color: var(--color-theme1);
+}
 
+.toggle-button {
+    width: 136px;
+    height: 68px;
+    background-color: #fff;
+    border-color: var(--color-grey1);
+    border-width: 4px;
+    border-style: solid;
+    border-radius: 54px;
+    position: relative;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 10px 0px 10px 0px;
+}
+
+.toggle-circle {
+    width: 60px;
+    height: 60px;
+    background-color: var(--color-grey1);
+    border-radius: 50%;
+    border-style: solid;
+    border-width: 4px;
+    border-color: var(--color-theme1);
+    position: absolute;
+    /* top: 2px;
+    left: 2px; */
+    transition: left 0.3s ease;
+}
+  
+.toggle-button.active {
+    background-color: #4caf50;
+}
+  
+.toggle-button.active .toggle-circle {
+    left: 36px; /* Adjust this value to align the circle to the right */
 }

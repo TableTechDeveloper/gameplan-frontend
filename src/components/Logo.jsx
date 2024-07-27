@@ -1,11 +1,13 @@
 import React from 'react';
-import "../styles/Logo.css"
+import { NavLink } from 'react-router-dom';
 
 const Logo = () => {
     return (
-        <div className="logo">
-            <p>LOGO</p>
-        </div>
+        <NavLink to="/">
+            <div className="logo">
+                <h5>LOGO</h5>
+            </div>
+        </NavLink>
     );
 };
 

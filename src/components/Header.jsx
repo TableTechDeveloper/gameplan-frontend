@@ -1,3 +1,4 @@
+// Header.jsx - for use on all pages other than the homepage
 import React from 'react';
 import "../styles/Header.css";
 import Hamburger from "./Hamburger";
