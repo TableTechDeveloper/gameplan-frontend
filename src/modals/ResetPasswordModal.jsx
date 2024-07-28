@@ -1,6 +1,5 @@
-import React, { useContext } from 'react';
-import { ModalContext } from '../pages/_TemplatePage';
-import LoginModal from './LoginModal';
+import React from 'react';
+
 
 const ResetPasswordModal = () => {
   
