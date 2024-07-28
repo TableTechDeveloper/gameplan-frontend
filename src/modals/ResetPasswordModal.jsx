@@ -3,13 +3,7 @@ import { ModalContext } from '../pages/_TemplatePage';
 import LoginModal from './LoginModal';
 
 const ResetPasswordModal = () => {
-  const { closeModal, openModal } = useContext(ModalContext);
-
-  const handleResetPasswordClick = (event) => {
-    event.preventDefault();
-    closeModal();
-    openModal(<LoginModal />);
-  }
+  
 
   return (
     <div>
@@ -31,7 +25,7 @@ const ResetPasswordModal = () => {
           <input type="confirmPassword" name="confirmPassword" required />
         </div>
         
-        <button className="button-primary" type="submit" onClick={handleResetPasswordClick}>Reset Password</button>
+        <button className="button-primary" type="submit">Reset Password</button>
       
       </form>
     </div>
