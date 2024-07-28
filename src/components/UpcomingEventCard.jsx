@@ -1,8 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { ModalContext } from '../pages/_TemplatePage';
+import ConfirmModal from "../modals/ConfirmModal"
 import { NavLink } from 'react-router-dom';
 import "../styles/Card.css"
 
 const UpcomingEventCard = () => {
+    const { openModal } = useContext(ModalContext);
+
+    const handleLeaveEvent = () => {
+        // Logic for joining the event
+        openModal(<ConfirmModal message="leave this event" />);
+    };
+
     return (
         
         <div className='card'>
@@ -18,7 +27,7 @@ const UpcomingEventCard = () => {
                 <NavLink to="/newevent">
                     <button className="button-secondary">Edit Event</button>
                 </NavLink>
-                <button className="button-cancel">Leave Event</button>
+                <button className="button-cancel" onClick={handleLeaveEvent}>Leave Event</button>
             </div>
             <div className='game-image'>image</div>
         </div>

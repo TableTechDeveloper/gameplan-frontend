@@ -7,7 +7,7 @@ import Footer from '../components/Footer';
 import NavMenu from '../components/NavMenu';
 import TransitionWrapper from '../components/TransitionWrapper';
 import Modal from '../modals/Modal';
-import SuccessModal from '../modals/SuccessModal';
+
 
 // Context to manage the modal state
 export const ModalContext = createContext();
@@ -16,7 +16,6 @@ function Template() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [modalContent, setModalContent] = useState(null);
-    const [successMessage, setSuccessMessage] = useState('');
     
     const location = useLocation();
     const isHomePage = location.pathname === '/';
@@ -35,10 +34,6 @@ function Template() {
         setModalContent(null);
     };
 
-    const openSuccessModal = (message) => {
-        setSuccessMessage(message);
-        setIsModalOpen(true);
-      };
 
     return (
         <ModalContext.Provider value={{ openModal, closeModal }}>

@@ -1,3 +1,4 @@
+import React from 'react';
 import EventPreviewCard from "../components/EventPreviewCard"
 
 const Dashboard = () => (

@@ -7,7 +7,7 @@
     height: 100%;
     background: rgba(0, 0, 0, 0.7);
     display: flex;
-    justify-content: stretch;
+    justify-content: center;
     align-items: stretch;
     z-index: 1000;
 }
@@ -15,6 +15,7 @@
 .modal-content {
     background: #ffffff;
     width: 100%;
+    max-width: var(--main-width);
     margin: 60px 10px 10px 10px;
     padding: 20px;
     border-radius: 5px;
@@ -54,4 +55,35 @@
   cursor: pointer;
   font-weight: 500;
 
+}
+
+.success-popup {
+  background-color: var(--color-theme1);
+  color: #ffffff;
+  width: auto;
+  height: 150px;
+  align-self: center;
+  border-radius: var(--border-radius);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.confirm-popup {
+  background-color: rgb(236, 236, 236);
+  color: red;
+  padding: 30px 60px;
+  width: auto;
+  height: 150px;
+  align-self: center;
+  border-radius: var(--border-radius);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.confirm-popup h3 {
+  text-align: center
 }

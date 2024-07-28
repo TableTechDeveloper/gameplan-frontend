@@ -2,14 +2,14 @@
 import React from 'react';
 import '../styles/Modal.css';
 
-const SuccessModal = ({ message, onClose }) => {
+const SuccessModal = ({ message }) => {
   return (
-    <div className="modal-overlay">
-      <div className="modal-content">
-        <button className="close-button" onClick={onClose}>&times;</button>
-        <p>{message}</p>
-      </div>
+    
+    <div className="success-popup">
+        <h2>Success!</h2>
+        <h3>{message}</h3>
     </div>
+      
   );
 };
 

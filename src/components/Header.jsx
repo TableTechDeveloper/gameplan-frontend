@@ -4,10 +4,12 @@ import "../styles/Header.css";
 import Hamburger from "./Hamburger";
 import Logo from "./Logo";
 
-const Header = ({ isOpen, toggleMenu }) => {
+const Header = ({ isOpen, toggleMenu, setIsMenuOpen }) => {
+  const closeMenu = () => setIsMenuOpen(false);
+  
   return (
     <header className="header">
-      <Logo />
+      <Logo closeMenu={closeMenu} />
       <Hamburger isOpen={isOpen} onClick={toggleMenu} />
     </header>
   );

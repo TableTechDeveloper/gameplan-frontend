@@ -1,7 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { ModalContext } from '../pages/_TemplatePage';
+import SuccessModal from '../modals/SuccessModal';
 import "../styles/Card.css"
 
 const GameSearchCard = () => {
+    const { openModal } = useContext(ModalContext);
+
+    const handleAddGame = () => {
+        openModal(<SuccessModal message="Game added to your collection!" />);
+    };
+
     return (
         
         <div className='card'>
@@ -10,9 +18,9 @@ const GameSearchCard = () => {
                 <h4>Min-Players</h4>
                 <h4>Max-Players</h4>
                 <h4>Playtime</h4>
-                <button className="button-primary">Add Game</button>
+                <button className="button-primary" onClick={handleAddGame}>Add Game</button>
             </div>
-            <div className='game-image'>image</div>
+            <div className="game-image">image</div>
         </div>
 
     );
