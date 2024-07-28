@@ -33,8 +33,6 @@ const EditProfile = () => (
 
             <button  type="submit" className="button-primary">Save Changes</button>
             <button type="reset" className="button-cancel">Discard Changes</button>
-            
-
 
         </form>
 

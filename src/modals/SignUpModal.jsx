@@ -1,35 +1,36 @@
 import React, { useContext } from 'react';
-import { NavLink } from 'react-router-dom';
 import { ModalContext } from '../pages/_TemplatePage';
+import LoginModal from './LoginModal';
 
 const SignUpModal = () => {
-  const { closeModal } = useContext(ModalContext);
+  const { closeModal, openModal } = useContext(ModalContext);
 
-  const handleGoToDashboardClick = () => {
-    closeModal(); // Close the modal
-  };
+  const handleLoginClick = (event) => {
+    event.preventDefault();
+    closeModal();
+    openModal(<LoginModal />);
+  }
 
   return (
     <div>
-      <h2>Sign Up Form</h2>
+      
+      <p>Already a member? <span className="small-link" onClick={handleLoginClick}>Login!</span></p>
+      
       <form>
-        <label>
-          Email:
-          <input type="email" name="email" required />
-        </label>
-        <label>
-          Password:
-          <input type="password" name="password" required />
-        </label>
-        <label>
-          Confirm Password:
-          <input type="password" name="confirmPassword" required />
-        </label>
+        
+      <div className="form-field">
+            <label for="email">Email:</label>
+            <input type="email" name="email" required />
+        </div>
+        
+        <div className="form-field">
+            <label for="password">Password:</label>
+            <input type="password" name="password" required />
+        </div>
+        
+        
         <button className="button-primary" type="submit">Sign Up</button>
       </form>
-      <NavLink to="/dashboard">
-        <button className="button-secondary" onClick={handleGoToDashboardClick}>Go to Dashboard</button>
-      </NavLink>
     </div>
   );
 };
