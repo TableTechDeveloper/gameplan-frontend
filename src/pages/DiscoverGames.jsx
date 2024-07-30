@@ -8,7 +8,9 @@ const DiscoverGames = () => {
     const [error, setError] = useState(null);
 
     // Replace 'YourJWTTokenHere' with the actual token
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2YTZiZmJmYjRmNzIwMGJmMjNmZGVjZCIsImlhdCI6MTcyMjI4MTM3MywiZXhwIjoxNzIyODg2MTczfQ.34lOQIKGwvhn31E7nA4iguzpZ56aXpQSxaxcqMsdcz8';
+    const token = process.env.REACT_APP_API_TOKEN;
+
+    console.log("API Token:", token);
 
     const handleSearch = async (event) => {
         event.preventDefault();
