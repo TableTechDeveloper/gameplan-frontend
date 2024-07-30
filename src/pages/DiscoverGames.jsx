@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import GameSearchCard from "../components/GameSearchCard";
+import { NavLink } from 'react-router-dom';
 
 const DiscoverGames = () => {
     const [query, setQuery] = useState('');
@@ -8,7 +9,7 @@ const DiscoverGames = () => {
     const [error, setError] = useState(null);
 
     // Replace 'YourJWTTokenHere' with the actual token
-    const token = process.env.REACT_APP_API_TOKEN;
+    const token = localStorage.getItem('authToken');
 
     console.log("API Token:", token);
 
@@ -51,6 +52,9 @@ const DiscoverGames = () => {
                     <p>No games found</p>
                 )}
             </div>
+            <NavLink to="/gamesowned">
+                <button className="button-secondary">My Games</button>
+            </NavLink>
         </section>
     );
 };

@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { NavLink } from 'react-router-dom';
-import GameCard from '../components/GameOwnedCard';
+import GameOwnedCard from '../components/GameOwnedCard';
 
 const GamesOwned = () => {
     const [games, setGames] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    const token = localStorage.getItem('authToken');
+
     useEffect(() => {
         // Fetch games from the backend
         const fetchGames = async () => {
             try {
-                const response = await axios.get('/collection', {
+                const response = await axios.get('http://localhost:3000/user/collection', {
                     headers: {
-                        'Authorization': `Bearer ${process.env.REACT_APP_API_TOKEN}`  // Replace with your actual token handling
+                        'Authorization': `Bearer ${token}`
                     }
                 });
                 setGames(response.data.games);
@@ -27,7 +29,11 @@ const GamesOwned = () => {
         };
 
         fetchGames();
-    }, []);
+    }, [token]);
+
+    const handleRemoveGameFromList = (gameId) => {
+        setGames((prevGames) => prevGames.filter((game) => game._id !== gameId));
+    };
 
     if (loading) {
         return <p>Loading...</p>;
@@ -45,16 +51,19 @@ const GamesOwned = () => {
             </NavLink>
             <div>
                 {games.map((game) => (
-                    <GameCard 
-                        key={game._id}  // Assuming each game has a unique _id
+                    <GameOwnedCard 
+                        key={game._id}
+                        gameId={game._id}
                         name={game.name}
-                        minPlayers={game.minPlayers}
-                        maxPlayers={game.maxPlayers}
+                        minPlayers={game.minplayers}
+                        maxPlayers={game.maxplayers}
                         playtime={game.playtime}
                         image={game.image}
+                        onRemoveGame={handleRemoveGameFromList}
                     />
                 ))}
             </div>
+            
         </section>
     );
 };
