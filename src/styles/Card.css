@@ -13,7 +13,18 @@
 
 .game-image {
     width: 150px;
+    height: 150px; /* Add a fixed height */
     background-color: var(--color-grey1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.game-image img {
+    min-width: 100%;
+    min-height: 100%;
+    object-fit: cover;
 }
 
 .card button {
