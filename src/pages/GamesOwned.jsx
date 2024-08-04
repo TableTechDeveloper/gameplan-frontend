@@ -15,7 +15,7 @@ const GamesOwned = () => {
     const fetchGames = async () => {
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_SERVER_URL}/user/collection/${gameId}/user/collection`,
+          `${process.env.REACT_APP_SERVER_URL}/user/collection`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

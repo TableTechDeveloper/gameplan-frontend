@@ -17,7 +17,7 @@ const GameSearchCard = ({ game }) => {
       }
 
       const response = await axios.post(
-        `${process.env.REACT_APP_SERVER_URL}/user/collection/${gameId}/games/add`,
+        `${process.env.REACT_APP_SERVER_URL}/games/add`,
         { gameId: game.boardgamegeekref },
         {
           headers: {

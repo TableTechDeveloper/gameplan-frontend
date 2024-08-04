@@ -27,7 +27,7 @@ const GameOwnedCard = ({
       }
 
       const response = await axios.delete(
-        `${process.env.REACT_APP_SERVER_URL}/user/collection/${gameId}/user/collection/${gameId}`,
+        `${process.env.REACT_APP_SERVER_URL}/user/collection/${gameId}`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
