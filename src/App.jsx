@@ -10,6 +10,7 @@ import HomePage from "./pages/HomePage.jsx";
 import MyDrafts from "./pages/MyDrafts.jsx";
 import MyEvents from "./pages/MyEvents.jsx";
 import NewEvent from "./pages/NewEvent.jsx";
+import axios from "axios";
 
 const App = () => {
   return (
