@@ -21,7 +21,7 @@ const RegisterForm = () => {
 
     try {
       const response = await axios.post(
-        "/user/register",
+        `${process.env.REACT_APP_SERVER_URL}/user/register`,
         {
           username,
           email,
