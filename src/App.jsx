@@ -12,8 +12,8 @@ import MyEvents from "./pages/MyEvents.jsx";
 import NewEvent from "./pages/NewEvent.jsx";
 import axios from "axios";
 
-axios.defaults.baseURL = `${process.env.REACT_APP_SERVER_URL}`;
-
+axios.defaults.baseURL = axios.defaults.baseURL =
+  process.env.REACT_APP_SERVER_URL; // Set base URL globally
 // Request interceptor
 axios.interceptors.request.use(function (config) {
   const token = localStorage.getItem("token");
