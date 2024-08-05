@@ -10,19 +10,19 @@ import HomePage from "./pages/HomePage.jsx";
 import MyDrafts from "./pages/MyDrafts.jsx";
 import MyEvents from "./pages/MyEvents.jsx";
 import NewEvent from "./pages/NewEvent.jsx";
-import axios from "axios";
+// import axios from "axios";
 
-axios.defaults.baseURL = axios.defaults.baseURL =
-  process.env.REACT_APP_SERVER_URL; // Set base URL globally
+// axios.defaults.baseURL = axios.defaults.baseURL =
+//   process.env.REACT_APP_SERVER_URL; // Set base URL globally
 // Request interceptor
-axios.interceptors.request.use(function (config) {
-  const token = localStorage.getItem("token");
-  console.log("Interceptor - Token from localStorage: ", token);
+// axios.interceptors.request.use(function (config) {
+//   const token = localStorage.getItem("token");
+//   console.log("Interceptor - Token from localStorage: ", token);
 
-  // If token exists, add it to the Authorization header
-  config.headers.Authorization = token ? `Bearer ${token}` : "";
-  return config;
-});
+//   // If token exists, add it to the Authorization header
+//   config.headers.Authorization = token ? `Bearer ${token}` : "";
+//   return config;
+// });
 
 const App = () => {
   return (
