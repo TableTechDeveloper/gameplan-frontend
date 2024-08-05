@@ -26,14 +26,11 @@ const GameOwnedCard = ({
         return;
       }
 
-      const response = await axios.delete(
-        `${process.env.REACT_APP_SERVER_URL}/user/collection/${gameId}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await axios.delete(`/user/collection/${gameId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       if (response.status === 200) {
         openModal(
