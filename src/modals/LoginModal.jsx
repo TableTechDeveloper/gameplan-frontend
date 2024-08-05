@@ -1,51 +1,38 @@
-import React, { useContext } from 'react';
-import { ModalContext } from '../pages/_TemplatePage';
-import SignUpModal from '../modals/SignUpModal';
-import ResetPasswordModal from './ResetPasswordModal';
+import React, { useContext } from "react";
+import { ModalContext } from "../pages/_TemplatePage";
+import RegisterModal from "../modals/RegisterModal";
+import ResetPasswordModal from "./ResetPasswordModal";
+import LoginForm from "../components/LoginForm";
 
 const LoginModal = () => {
   const { closeModal, openModal } = useContext(ModalContext);
 
-  
-  const handleSignUpClick = (event) => {
-    event.preventDefault(); // Prevent the default anchor behavior
-    closeModal(); // Close the current modal
-    openModal(<SignUpModal />); // Open the sign-up modal
+  const handleRegisterClick = (event) => {
+    event.preventDefault();
+    closeModal();
+    openModal(<RegisterModal />);
   };
 
   const handleForgotPasswordClick = (event) => {
-    event.preventDefault(); // Prevent the default anchor behavior
-    closeModal(); // Close the current modal
-    openModal(<ResetPasswordModal />); // Open the sign-up modal
-  }
+    event.preventDefault();
+    closeModal();
+    openModal(<ResetPasswordModal />);
+  };
 
   return (
     <div>
-      <p>Not a member yet? <span className="small-link" onClick={handleSignUpClick}>Sign Up!</span></p>
-      
-      <form>
+      <p>
+        Not a member yet?{" "}
+        <span className="small-link" onClick={handleRegisterClick}>
+          Sign Up!
+        </span>
+      </p>
 
-        <div className="form-field">
-            <label for="email">Email:</label>
-            <input type="email" name="email" required />
-        </div>
+      <LoginForm />
 
-        <div className="form-field">
-            <label for="password">Password:</label>
-            <input type="password" name="password" required />
-        </div>
-
-        <div className="form-field">
-            <label for="password">Confirm Password:</label>
-            <input type="password" name="confirm-password" required />
-        </div>
-
-        <p className="small-link" onClick={handleForgotPasswordClick}>Forgot Password?</p>
-        
-        <button className="button-primary" type="submit">Login</button>
-      
-      </form>
-      
+      <p className="small-link" onClick={handleForgotPasswordClick}>
+        Forgot Password?
+      </p>
     </div>
   );
 };

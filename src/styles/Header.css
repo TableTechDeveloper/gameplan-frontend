@@ -1,75 +1,68 @@
 .header {
-    display: flex;
-    justify-content: center;
-    background-color: var(--color-grey1);
-    padding: 10px 20px 10px 20px;
-    height: 40px;
+  display: flex;
+  justify-content: center;
+  background-color: var(--color-grey1);
+  padding: 10px 20px 10px 20px;
+  height: 40px;
 }
 
 .header-content {
-    width: 100%;
-    max-width: 1200px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-shrink: 0;
-    position: relative;
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+  position: relative;
 }
 
 .home-header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-shrink: 0;
-    position: relative;
-    background-color: var(--color-grey1);
-    padding: 10px 20px 10px 20px;
-    height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  position: relative;
+  background-color: var(--color-grey1);
+  padding: 10px 20px 10px 20px;
+  height: 40px;
 }
 
 .home-header-buttons {
-    display: flex;
-    justify-content: space-between;
-    max-width: 650px;
-    flex-grow: 1;
+  display: flex;
+  justify-content: space-between;
+  max-width: 650px;
+  flex-grow: 1;
 }
 
-
 .home-header button {
-    height: 40px;
-    font-size: 1.2rem;
-    max-width: 150px;
+  height: 40px;
+  font-size: 1.2rem;
+  max-width: 150px;
 }
 
 #header-logo {
-    height: 50px;
+  height: 50px;
 }
-
-
-
 
 @media only screen and (min-width: 740px) {
+  .home-header {
+    height: 60px;
+  }
 
-    .home-header {
-        height: 60px;
-    }
-
-    .home-header button {
-        height: 50px;
-        font-size: 1.5rem;
-        max-width: 180px;
-    }
+  .home-header button {
+    height: 50px;
+    font-size: 1.5rem;
+    max-width: 180px;
+  }
 }
 
-
 @media only screen and (min-width: 1024px) {
+  .header,
+  .home-header {
+    height: 80px;
+  }
 
-    .header, .home-header {
-        height: 80px;
-    }
-
-    #header-logo {
-        height: 70px;
-    }
-
+  #header-logo {
+    height: 70px;
+  }
 }
