@@ -12,7 +12,7 @@ import MyEvents from "./pages/MyEvents.jsx";
 import NewEvent from "./pages/NewEvent.jsx";
 import axios from "axios";
 
-axios.defaults.baseURL = "http://localhost:3000";
+axios.defaults.baseURL = `${process.env.REACT_APP_SERVER_URL}`;
 
 // Request interceptor
 axios.interceptors.request.use(function (config) {

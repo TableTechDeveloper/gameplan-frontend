@@ -17,7 +17,7 @@ const DiscoverGames = () => {
     event.preventDefault();
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_SERVER_URL}/games/search?query=${query}&strict=true`,
+        `/games/search?query=${query}&strict=true`,
         {
           headers: {
             Authorization: `Bearer ${token}`,

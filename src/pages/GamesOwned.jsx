@@ -14,14 +14,11 @@ const GamesOwned = () => {
     // Fetch games from the backend
     const fetchGames = async () => {
       try {
-        const response = await axios.get(
-          `${process.env.REACT_APP_SERVER_URL}/user/collection`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const response = await axios.get(`/user/collection`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         setGames(response.data.games);
       } catch (err) {
         setError("Failed to load games.");
