@@ -1,9 +1,9 @@
-import React, { useEffect, userState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import EventPreviewCard from "../components/EventPreviewCard";
 
 const Dashboard = () => {
-  const [user, setUser] = userState(null);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     const fetchUserData = async () => {
