@@ -1,43 +1,33 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
+import { UserContext } from '../context/UserContext';
 import useFetchEvents from "../functions/useFetchEvents";
 import UpcomingEventCard from "../components/UpcomingEventCard";
-import { API_BASE_URL, getToken } from '../config';
+
 
 const MyEvents = () => {
-    const token = getToken();
+    const { user, loading: userLoading } = useContext(UserContext);
+    const { events, loading, error } = useFetchEvents(true);
 
-    const { events, loading: eventsLoading, error: eventsError } = useFetchEvents(API_BASE_URL, token);
-    
-
-    if (eventsLoading) {
-        return <div>Loading...</div>;
+    if (loading || userLoading) {
+        return <p>Loading...</p>;
     }
 
-    if (eventsError) {
-        return <div>{eventsError}</div>;
+    if (error) {
+        return <p>{error}</p>;
     }
 
-       
     return (
-        <section className="MyEvents">
-            <h2>My Events:</h2>
-            <div>
-                <NavLink to="/newevent">
-                    <button className="button-primary">New Event</button>
-                </NavLink>
-                <NavLink to="/mydrafts">
-                    <button className="button-secondary">View Drafts</button>
-                </NavLink>
-            </div>
-            <h2>Upcoming events:</h2>
-            <div>
+        <section className="my-events">
+            <h2>My Events</h2>
+            <p>Welcome, {user ? user.username : 'Guest'}!</p>
+            <NavLink to="/discoverevents">
+                <button className="button-primary">Discover Events</button>
+            </NavLink>
+            <h3>Hosted Events:</h3>
+            <div className="event-list">
                 {events.map(event => (
-                    <UpcomingEventCard 
-                        key={event._id}
-                        event={event}
-                        // onLeaveEvent={handleLeaveEvent}
-                    />
+                    <UpcomingEventCard key={event._id} event={event} />
                 ))}
             </div>
         </section>

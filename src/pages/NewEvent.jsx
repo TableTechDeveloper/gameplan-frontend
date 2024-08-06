@@ -13,7 +13,7 @@ const NewEvent = () => {
     const [eventDate, setEventDate] = useState(new Date());
     const [title, setTitle] = useState('');
     const [location, setLocation] = useState('');
-    const [description, setDescription] = useState('');
+    // const [description, setDescription] = useState('');
     const [isPublic, setIsPublic] = useState(true);
     const [minParticipants, setMinParticipants] = useState('');
     const [maxParticipants, setMaxParticipants] = useState('');
@@ -51,7 +51,7 @@ const NewEvent = () => {
             maxParticipants: maxParticipants || gameDetails.maxPlayers,
             eventDate,
             location,
-            description,
+            // description,
             isPublic,
             isPublished: true,
             gameImage: gameDetails.image,
@@ -167,7 +167,7 @@ const NewEvent = () => {
                         required
                     />
                 </div>
-                <div className="form-field">
+                {/* <div className="form-field">
                     <label htmlFor="description">Description:</label>
                     <input
                         type="text"
@@ -176,7 +176,7 @@ const NewEvent = () => {
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                     />
-                </div>
+                </div> */}
                 <div className="form-field">
                     <label>Visibility:</label>
                     <div>

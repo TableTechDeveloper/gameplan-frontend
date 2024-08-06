@@ -6,35 +6,30 @@ const useFetchUser = () => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const token = getToken();
 
     useEffect(() => {
         const fetchUser = async () => {
             try {
+                const token = getToken();
                 const response = await axios.get(`${API_BASE_URL}/user`, {
                     headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
+                        Authorization: `Bearer ${token}`,
+                    },
                 });
-                console.log("User response:", response.data);
-                setUser({
-                    username: response.data.username,
-                    email: response.data.email,
-                    location: response.data.location,
-                    bio: response.data.bio
-                });
-            } catch (err) {
-                setError("Failed to load user information.");
-                console.error(err);
+                setUser(response.data.user);
+            } catch (error) {
+                setError("Failed to load user.");
+                console.error("Failed to load user:", error);
             } finally {
                 setLoading(false);
             }
         };
 
         fetchUser();
-    }, [token]);
+    }, []);
 
     return { user, loading, error };
 };
 
 export default useFetchUser;
+

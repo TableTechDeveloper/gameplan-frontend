@@ -2,13 +2,12 @@ import React from 'react';
 import useFetchEvents from "../functions/useFetchEvents";
 import useFetchUser from "../functions/useFetchUser";
 import UpcomingEventCard from "../components/UpcomingEventCard";
-import { API_BASE_URL, getToken } from '../config';
+
 
 const Dashboard = () => {
-    const token = getToken();
 
-    const { events, loading: eventsLoading, error: eventsError } = useFetchEvents(API_BASE_URL, token);
-    const { user, loading: userLoading, error: userError } = useFetchUser(API_BASE_URL, token);
+    const { events, loading: eventsLoading, error: eventsError } = useFetchEvents(false); // Set hosted to false
+    const { user, loading: userLoading, error: userError } = useFetchUser();
 
     if (eventsLoading || userLoading) {
         return <div>Loading...</div>;

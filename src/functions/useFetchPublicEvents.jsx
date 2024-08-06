@@ -10,9 +10,7 @@ const useFetchPublicEvents = () => {
     useEffect(() => {
         const fetchPublicEvents = async () => {
             try {
-                const response = await axios.get(`${API_BASE_URL}/events`, {
-                    // no headers needed for public events
-                });
+                const response = await axios.get(`${API_BASE_URL}/events`);
                 setEvents(response.data.foundEvents);
             } catch (err) {
                 setError("Failed to load events.");

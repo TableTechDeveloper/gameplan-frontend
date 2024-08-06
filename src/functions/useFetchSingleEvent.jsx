@@ -7,27 +7,27 @@ const useFetchSingleEvent = (eventId) => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    useEffect(() => {
-        const fetchEvent = async () => {
-            try {
-                const response = await axios.get(`${API_BASE_URL}/events/${eventId}`, {
-                    headers: {
-                        'Authorization': `Bearer ${getToken()}`
-                    }
-                });
-                setEvent(response.data.result);  // Assuming 'result' holds the event data
-            } catch (err) {
-                setError('Failed to load event data. ' + (err.response?.data?.message || err.message));
-                console.error(err);
-            } finally {
-                setLoading(false);
-            }
-        };
+    const fetchEvent = async () => {
+        try {
+            const response = await axios.get(`${API_BASE_URL}/events/${eventId}`, {
+                headers: {
+                    Authorization: `Bearer ${getToken()}`,
+                },
+            });
+            setEvent(response.data.result);  // Assuming 'result' holds the event data
+        } catch (err) {
+            setError('Failed to load event data. ' + (err.response?.data?.message || err.message));
+            console.error(err);
+        } finally {
+            setLoading(false);
+        }
+    };
 
+    useEffect(() => {
         fetchEvent();
     }, [eventId]);
 
-    return { event, loading, error };
+    return { event, loading, error, fetchEvent };
 };
 
 export default useFetchSingleEvent;
