@@ -22,7 +22,9 @@ const App = () => {
                 <Route path="discoverevents" element={<DiscoverEvents />} />
                 <Route path="discovergames" element={<DiscoverGames />} />
                 <Route path="editprofile" element={<EditProfile />} />
-                <Route path="eventpage" element={<EventPage />} />
+                <Route path="events/new" element={<NewEvent />} />
+                <Route path="events/edit/:id" element={<NewEvent />} />  
+                <Route path="events/:id" element={<EventPage />} />
                 <Route path="gamesowned" element={<GamesOwned />} />
                 <Route path="mydrafts" element={<MyDrafts />} />
                 <Route path="myevents" element={<MyEvents />} />

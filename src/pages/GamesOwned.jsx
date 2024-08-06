@@ -1,41 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
 import GameOwnedCard from '../components/GameOwnedCard';
+import { UserContext } from '../context/UserContext';
+import useFetchGames from '../functions/useFetchGames';
 
 const GamesOwned = () => {
-    const [games, setGames] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    const { user, loading: userLoading } = useContext(UserContext);
+    const { games, loading, error, removeGame } = useFetchGames();
 
-    const token = localStorage.getItem('authToken');
-
-    useEffect(() => {
-        // Fetch games from the backend
-        const fetchGames = async () => {
-            try {
-                const response = await axios.get('http://localhost:3000/user/collection', {
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
-                });
-                setGames(response.data.games);
-            } catch (err) {
-                setError('Failed to load games.');
-                console.error(err);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchGames();
-    }, [token]);
-
-    const handleRemoveGameFromList = (gameId) => {
-        setGames((prevGames) => prevGames.filter((game) => game._id !== gameId));
-    };
-
-    if (loading) {
+    if (loading || userLoading) {
         return <p>Loading...</p>;
     }
 
@@ -46,6 +19,7 @@ const GamesOwned = () => {
     return (
         <section className="games-owned">
             <h2>My Games:</h2>
+            <p>Welcome, {user ? user.username : 'Guest'}!</p>
             <NavLink to="/discovergames">
                 <button className="button-primary">Discover Games</button>
             </NavLink>
@@ -59,11 +33,10 @@ const GamesOwned = () => {
                         maxPlayers={game.maxplayers}
                         playtime={game.playtime}
                         image={game.image}
-                        onRemoveGame={handleRemoveGameFromList}
+                        onRemoveGame={removeGame}
                     />
                 ))}
             </div>
-            
         </section>
     );
 };
