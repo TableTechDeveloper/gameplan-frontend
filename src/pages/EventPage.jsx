@@ -3,13 +3,16 @@ import { useParams, NavLink } from 'react-router-dom';
 import { ModalContext } from '../pages/_TemplatePage';
 import SuccessModal from '../modals/SuccessModal';
 import ConfirmModal from '../modals/ConfirmModal';
-import useFetchSingleEvent from "../functions/useFetchSingleEvent"
-import "../styles/EventPage.css"
+import useFetchSingleEvent from "../functions/useFetchSingleEvent";
+import useFetchUser from '../functions/useFetchUser'; // Import useFetchUser
+import CancelEventButton from '../components/CancelEventButton';
+import "../styles/EventPage.css";
 
 const EventPage = () => {
     const { id } = useParams();
     const { openModal } = useContext(ModalContext);
-    const { event, loading, error } = useFetchSingleEvent(id);
+    const { event, loading: eventLoading, error: eventError } = useFetchSingleEvent(id);
+    const { user, loading: userLoading, error: userError } = useFetchUser(); // Use useFetchUser to get current user
     
     const handleJoinEvent = () => {
         openModal(<SuccessModal message="You have joined this event!" />);
@@ -19,9 +22,20 @@ const EventPage = () => {
         openModal(<ConfirmModal message="leave this event" />);
     };
 
-    if (loading) return <p>Loading...</p>;
-    if (error) return <p>{error}</p>;
+    if (eventLoading || userLoading) return <p>Loading...</p>;
+    if (eventError || userError) return <p>{eventError || userError}</p>;
     if (!event) return <p>Event not found.</p>;
+
+    console.log("Current user:", user);
+    console.log("Event host:", event.host);
+
+    console.log("Current user:", user);
+    console.log("Event host:", event.host);
+    console.log("Current user ID:", user ? user._id : "No user ID");
+    console.log("Event host ID:", event.host ? event.host._id : "No event host ID");
+
+    const isHost = user && event.host && user._id === event.host._id;
+    console.log("Is current user the host?", isHost);
 
     return (
         <section className="EventPage">
@@ -53,12 +67,19 @@ const EventPage = () => {
             ))}
             <h3>Free Spots:</h3>
             <p>{event.maxParticipants - event.participants.length}</p>
-            <button className="button-primary" onClick={handleJoinEvent}>Join Event</button>
-            <button className="button-cancel" onClick={handleLeaveEvent}>Leave Event</button>
-            <NavLink to={`/events/edit/${event._id}`}>
-                <div className="edit-link">Edit Event</div>
-            </NavLink>
-            <div className="cancel-link">Cancel Event</div>
+            {isHost ? (
+                <>
+                    <NavLink to={`/events/edit/${event._id}`}>
+                        <button className="button-secondary">Edit Event</button>
+                    </NavLink>
+                    <CancelEventButton eventId={id} />
+                </>
+            ) : (
+                <>
+                    <button className="button-primary" onClick={handleJoinEvent}>Join Event</button>
+                    <button className="button-cancel" onClick={handleLeaveEvent}>Leave Event</button>
+                </>
+            )}
         </section>
     );
 };
