@@ -11,13 +11,10 @@ const LoginForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post(
-        `https://gameplan-backend.onrender.com/user/login`,
-        {
-          username,
-          password,
-        }
-      );
+      const response = await axios.post(`/user/login`, {
+        username,
+        password,
+      });
       console.log("Login successful:", response.data);
       // Handle successful login (e.g., store token, redirect user)
       const data = await response.data;
