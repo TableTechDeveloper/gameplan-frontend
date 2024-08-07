@@ -15,7 +15,7 @@ const Dashboard = () => {
         }
 
         const response = await axios.get(
-          `https://gameplan-backend.onrender.com/user`,
+          `/user`, //
           {
             headers: {
               Authorization: `Bearer ${token}`,

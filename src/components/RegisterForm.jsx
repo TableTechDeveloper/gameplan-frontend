@@ -21,7 +21,7 @@ const RegisterForm = () => {
 
     try {
       const response = await axios.post(
-        `https://gameplan-backend.onrender.com/user/register`,
+        `/user/register`,
         {
           username,
           email,
