@@ -3,9 +3,11 @@ import useFetchEvents from "../functions/useFetchEvents";
 import UpcomingEventCard from "../components/UpcomingEventCard";
 import UserIcon from "../components/UserIcon";
 import { NavLink } from "react-router-dom";
+import axios from "../axios";
 
 const Dashboard = () => {
   const [user, setUser] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -22,10 +24,20 @@ const Dashboard = () => {
           },
         });
 
-        setUser(response.data.user);
+        setUser(response.data);
+        console.log("Fetched user data:", response.data);
       } catch (error) {
         console.error("Error fetching user data:", error);
         // Handle error (display error message)
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.message
+        ) {
+          setError(error.response.data.message);
+        } else {
+          setError("An error occurred while fetching user data.");
+        }
       }
     };
 
@@ -51,6 +63,8 @@ const Dashboard = () => {
         <div>
           <h1>Dashboard:</h1>
           <UserIcon />
+          <h2>Welcome {user ? user.username : "Guest"}</h2>
+          <p>Your upcoming games:</p>
         </div>
         <div className="page-buttons">
           <NavLink to="/newevent">
@@ -64,6 +78,8 @@ const Dashboard = () => {
           <UpcomingEventCard key={event._id} event={event} />
         ))}
       </div>
+      {error && <div className="error-message">{error}</div>}{" "}
+      {/* Display error message if there is an error */}
     </section>
   );
 };
