@@ -18,22 +18,6 @@ const EditProfile = () => (
         <label htmlFor="bio">Bio:</label>
         <input type="text" id="bio" name="bio" required />
       </div>
-
-      <div className="form-field">
-        <label htmlFor="password">Password:</label>
-        <input type="text" id="password" name="password" required />
-      </div>
-
-      <div className="form-field">
-        <label htmlFor="confirm-password">Confirm Password:</label>
-        <input
-          type="password"
-          id="confirm-password"
-          name="confirm-password"
-          required
-        />
-      </div>
-
       <button type="submit" className="button-primary">
         Save Changes
       </button>
