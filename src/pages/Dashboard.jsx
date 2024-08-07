@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
+import axios from "../axios";
 import EventPreviewCard from "../components/EventPreviewCard";
 
 const Dashboard = () => {
   const [user, setUser] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -14,19 +15,26 @@ const Dashboard = () => {
           return;
         }
 
-        const response = await axios.get(
-          `/user`, //
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const response = await axios.get(`/user`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
-        setUser(response.data.user);
+        setUser(response.data);
+        console.log("Fetched user data:", response.data);
       } catch (error) {
         console.error("Error fetching user data:", error);
         // Handle error (display error message)
+        if (
+          error.response &&
+          error.response.data &&
+          error.response.data.message
+        ) {
+          setError(error.response.data.message);
+        } else {
+          setError("An error occurred while fetching user data.");
+        }
       }
     };
 
@@ -36,11 +44,7 @@ const Dashboard = () => {
   return (
     <section className="dashboard">
       <div>
-        {user ? (
-          <h2>Welcome {user.username}</h2>
-        ) : (
-          <h2>You are not welcome here! I must protect my routes</h2> // Temporary message to show a non logged in user on dashboard without protected routes
-        )}
+        <h2>Welcome {user ? user.username : "Guest"}</h2>
         <p>Your upcoming games:</p>
       </div>
       <div className="upcoming-games">
@@ -48,6 +52,8 @@ const Dashboard = () => {
         <EventPreviewCard />
         <EventPreviewCard />
       </div>
+      {error && <div className="error-message">{error}</div>}{" "}
+      {/* Display error message if there is an error */}
     </section>
   );
 };
