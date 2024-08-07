@@ -58,6 +58,10 @@ const EditProfile = () => {
       });
 
       setUserData(updatedUserData);
+      console.log(
+        "Changes patched successfully! Updated user data:",
+        updatedUserData
+      );
     } catch (error) {
       console.error("Error updating user data:", error);
       // Handle error (display error message)
@@ -73,47 +77,64 @@ const EditProfile = () => {
     }
   };
 
+  const handleDiscardChanges = (event) => {
+    event.target.reset();
+    console.log("Changes discarded.");
+  };
+
   return (
     <section className="EditProfile">
       <h2>Profile Photo</h2>
       <div className="profile-photo"></div>
 
       {error && <div className="error-message">{error}</div>}
+      {userData && (
+        <form
+          id="edit-profile"
+          onSubmit={handleSubmit}
+          onReset={handleDiscardChanges}
+          method="post"
+        >
+          <div className="form-field">
+            <label htmlFor="username">Username:</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              defaultValue={userData?.username}
+              required
+            />
+          </div>
 
-      <form id="edit-profile" onSubmit={handleSubmit} method="post">
-        <div className="form-field">
-          <label htmlFor="username">Username:</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            defaultValue={userData?.username}
-            required
-          />
-        </div>
+          <div className="form-field">
+            <label htmlFor="location">Location:</label>
+            <input
+              type="text"
+              id="location"
+              name="location"
+              defaultValue={userData?.location}
+              required
+            />
+          </div>
 
-        <div className="form-field">
-          <label htmlFor="location">Location:</label>
-          <input
-            type="text"
-            id="location"
-            name="location"
-            defaultValue={userData?.location}
-            required
-          />
-        </div>
+          <div className="form-field">
+            <label htmlFor="bio">Bio:</label>
+            <input
+              type="text"
+              id="bio"
+              name="bio"
+              defaultValue={userData?.bio}
+            />
+          </div>
 
-        <div className="form-field">
-          <label htmlFor="bio">Bio:</label>
-          <input type="text" id="bio" name="bio" defaultValue={userData?.bio} />
-        </div>
-        <button type="submit" className="button-primary">
-          Save Changes
-        </button>
-        <button type="reset" className="button-cancel">
-          Discard Changes
-        </button>
-      </form>
+          <button type="submit" className="button-primary">
+            Save Changes
+          </button>
+          <button type="reset" className="button-cancel">
+            Discard Changes
+          </button>
+        </form>
+      )}
     </section>
   );
 };
