@@ -1,104 +1,203 @@
-/*
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { ModalContext } from './_TemplatePage';
-import ConfirmModal from "../modals/ConfirmModal";
+import useFetchGames from '../functions/useFetchGames';
+import useFetchSingleEvent from '../functions/useFetchSingleEvent';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import { API_BASE_URL, getToken } from '../config';
+import { ModalContext } from '../pages/_TemplatePage';
+import SuccessModal from '../modals/SuccessModal';
+import FailModal from '../modals/FailModal';
 
-const NewEvent = () => {
-    const { id } = useParams(); // Get the event ID from the URL if it exists
+const EditEvent = () => {
+    const { id } = useParams();
+    const { loading: gamesLoading, error: gamesError } = useFetchGames();
+    const { event, loading: eventLoading, error: eventError } = useFetchSingleEvent(id);
+    const [selectedGame, setSelectedGame] = useState('');
+    const [gameDetails, setGameDetails] = useState({ duration: '', minPlayers: '', maxPlayers: '', image: '', thumbnail: '' });
+    const [eventDate, setEventDate] = useState(new Date());
+    const [title, setTitle] = useState('');
+    const [location, setLocation] = useState('');
+    const [isPublic, setIsPublic] = useState(true);
+    const [minParticipants, setMinParticipants] = useState('');
+    const [maxParticipants, setMaxParticipants] = useState('');
+    const [gameId, setGameId] = useState('');
     const navigate = useNavigate();
     const { openModal } = useContext(ModalContext);
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState(null);
-    const [eventData, setEventData] = useState({
-
-    });
-
-    const token = localStorage.getItem('authToken'); // Ensure you're retrieving the token
 
     useEffect(() => {
-        if (id) {
-            setIsLoading(true);
-            axios.get(`${process.env.REACT_APP_SERVER_URL}/events/${id}`, {
-                headers: { Authorization: `Bearer ${token}` }
-            })
-            .then(response => {
-                setEventData(response.data.result);
-                setIsLoading(false);
-            })
-            .catch(error => {
-                console.error('Failed to load event data:', error.response ? error.response.data : error);
-                setError('Failed to load event data');
-                setIsLoading(false);
+        if (event) {
+            console.log('Event data:', event); // Debugging
+            setTitle(event.title);
+            setSelectedGame(event.game.name); // Set the game name
+            setEventDate(new Date(event.eventDate));
+            setLocation(event.location);
+            setIsPublic(event.isPublic);
+            setMinParticipants(event.minParticipants);
+            setMaxParticipants(event.maxParticipants);
+            setGameDetails({
+                duration: event.gamelength,
+                minPlayers: event.minParticipants,
+                maxPlayers: event.maxParticipants,
+                image: event.gameImage,
+                thumbnail: event.gameThumbnail
             });
+            setGameId(event.game._id);
         }
-    }, [id, token]);
+    }, [event]);
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setEventData(prev => ({ ...prev, [name]: value }));
-    };
-
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        const method = id ? 'patch' : 'post';
-        const url = `${process.env.REACT_APP_SERVER_URL}/events/${id || ''}`;
-        axios[method](url, eventData)
-            .then(() => {
-                navigate('/myevents'); // Redirect to events page or confirmation page
-            })
-            .catch(err => {
-                console.error('Error submitting event:', err);
-                openModal(<ConfirmModal message="Failed to save event" />);
+        const eventData = {
+            title,
+            game: gameId,
+            duration: gameDetails.duration,
+            minParticipants: minParticipants || gameDetails.minPlayers,
+            maxParticipants: maxParticipants || gameDetails.maxPlayers,
+            eventDate,
+            location,
+            isPublic,
+            isPublished: true,
+            gameImage: gameDetails.image,
+            gameThumbnail: gameDetails.thumbnail
+        };
+
+        try {
+            const token = getToken();
+            const response = await axios.patch(`${API_BASE_URL}/events/${id}`, eventData, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
             });
+
+            openModal(<SuccessModal message={`Event ${response.data.event.title} updated successfully!`} />);
+            navigate(`/events/${id}`);
+        } catch (error) {
+            if (error.response) {
+                console.error('Error response data:', error.response.data);
+                console.error('Error response status:', error.response.status);
+                console.error('Error response headers:', error.response.headers);
+                openModal(<FailModal message={`Failed to update the event: ${error.response.data.message}`} />);
+            } else if (error.request) {
+                console.error('Error request:', error.request);
+                openModal(<FailModal message="Failed to update the event. Please try again later." />);
+            } else {
+                console.error('Error message:', error.message);
+                openModal(<FailModal message={`Failed to update the event: ${error.message}`} />);
+            }
+        }
     };
 
-    if (isLoading) return <p>Loading...</p>;
-    if (error) return <p>{error}</p>;
-
-    const handleDeleteEvent = () => {
-        openModal(<ConfirmModal message="delete this event" />);
-    };
+    if (gamesLoading || eventLoading) return <p>Loading...</p>;
+    if (gamesError || eventError) return <p>{gamesError || eventError}</p>;
 
     return (
         <section className="NewEvent">
-            <h2>{id ? 'Edit Event:' : 'New Event:'}</h2>
-
+            <h1>Edit Event</h1>
             <form id="new-event" onSubmit={handleSubmit}>
-                
                 <div className="form-field">
-                    <label htmlFor="eventName">Event Name:</label>
-                    <input type="text" id="event-name" name="title" value={eventData.title || ''} onChange={handleChange} required />
+                    <label htmlFor="title">Event Title:</label>
+                    <input
+                        type="text"
+                        id="title"
+                        name="title"
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                        required
+                    />
                 </div>
                 <div className="form-field">
-                    <label htmlFor="eventDate">Date:</label>
-                    <input type="text" id="event-date" name="eventDate" value={eventData.eventDate || ''} onChange={handleChange} required />
+                    <label htmlFor="game">Selected Game:</label>
+                    <input
+                        type="text"
+                        id="game"
+                        name="game"
+                        value={selectedGame}
+                        readOnly
+                    />
                 </div>
                 <div className="form-field">
-                    <label htmlFor="eventLocation">Location:</label>
-                    <input type="text" id="event-location" name="location" value={eventData.location || ''} onChange={handleChange} required />
+                    <label htmlFor="gameDuration">Game Duration:</label>
+                    <input
+                        type="text"
+                        id="game-duration"
+                        name="gameduration"
+                        value={gameDetails.duration}
+                        readOnly
+                    />
                 </div>
                 <div className="form-field">
-                    <label htmlFor="gameDuration">Duration:</label>
-                    <input type="text" id="event-duration" name="gamelength" value={eventData.gamelength || ''} onChange={handleChange} required />
+                    <label htmlFor="minParticipants">Min Participants:</label>
+                    <input
+                        type="text"
+                        id="min-participants"
+                        name="minparticipants"
+                        value={minParticipants || gameDetails.minPlayers}
+                        onChange={(e) => setMinParticipants(e.target.value)}
+                        required
+                    />
                 </div>
                 <div className="form-field">
-                    <label htmlFor="minPlayers">Min Players:</label>
-                    <input type="text" id="min-players" name="minParticipants" value={eventData.minParticipants || ''} onChange={handleChange} required />
+                    <label htmlFor="maxParticipants">Max Participants:</label>
+                    <input
+                        type="text"
+                        id="max-participants"
+                        name="maxparticipants"
+                        value={maxParticipants || gameDetails.maxPlayers}
+                        onChange={(e) => setMaxParticipants(e.target.value)}
+                        required
+                    />
                 </div>
                 <div className="form-field">
-                    <label htmlFor="maxPlayers">Max Players:</label>
-                    <input type="text" id="max-players" name="maxParticipants" value={eventData.maxParticipants || ''} onChange={handleChange} required />
+                    <label htmlFor="eventDate">Event Date and Time:</label>
+                    <DatePicker
+                        selected={eventDate}
+                        onChange={date => setEventDate(date)}
+                        showTimeSelect
+                        dateFormat="Pp"
+                    />
                 </div>
-                
-                <button type="submit" className="button-primary">Save Changes</button>
+                <div className="form-field">
+                    <label htmlFor="location">Location:</label>
+                    <input
+                        type="text"
+                        id="location"
+                        name="location"
+                        value={location}
+                        onChange={(e) => setLocation(e.target.value)}
+                        required
+                    />
+                </div>
+                <div className="form-field">
+                    <label>Visibility:</label>
+                    <div>
+                        <input
+                            type="radio"
+                            id="game-private"
+                            name="visibility"
+                            value="private"
+                            checked={!isPublic}
+                            onChange={() => setIsPublic(false)}
+                        />
+                        <label htmlFor="game-private">Private</label>
+                    </div>
+                    <div>
+                        <input
+                            type="radio"
+                            id="game-public"
+                            name="visibility"
+                            value="public"
+                            checked={isPublic}
+                            onChange={() => setIsPublic(true)}
+                        />
+                        <label htmlFor="game-public">Public</label>
+                    </div>
+                </div>
+                <button type="submit" className="button-primary">Update Event</button>
             </form>
-            {id && <button className="button-cancel" onClick={handleDeleteEvent}>Delete Event</button>}
         </section>
     );
 };
 
-export default NewEvent;
-
-*/
+export default EditEvent;

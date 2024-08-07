@@ -1,3 +1,5 @@
+
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -13,7 +15,6 @@ const NewEvent = () => {
     const [eventDate, setEventDate] = useState(new Date());
     const [title, setTitle] = useState('');
     const [location, setLocation] = useState('');
-    // const [description, setDescription] = useState('');
     const [isPublic, setIsPublic] = useState(true);
     const [minParticipants, setMinParticipants] = useState('');
     const [maxParticipants, setMaxParticipants] = useState('');
@@ -114,7 +115,6 @@ const NewEvent = () => {
                         </option>
                     ))}
                 </datalist>
-                {/* these fields below should autofill from selected game data */}
                 <div className="form-field">
                     <label htmlFor="gameDuration">Game Duration:</label>
                     <input
@@ -167,16 +167,6 @@ const NewEvent = () => {
                         required
                     />
                 </div>
-                {/* <div className="form-field">
-                    <label htmlFor="description">Description:</label>
-                    <input
-                        type="text"
-                        id="description"
-                        name="description"
-                        value={description}
-                        onChange={(e) => setDescription(e.target.value)}
-                    />
-                </div> */}
                 <div className="form-field">
                     <label>Visibility:</label>
                     <div>
