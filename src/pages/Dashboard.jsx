@@ -3,7 +3,7 @@ import axios from "../axios";
 import EventPreviewCard from "../components/EventPreviewCard";
 
 const Dashboard = () => {
-  const [user, setUser] = useState(null);
+  const [userData, setUserData] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -21,7 +21,7 @@ const Dashboard = () => {
           },
         });
 
-        setUser(response.data);
+        setUserData(response.data);
         console.log("Fetched user data:", response.data);
       } catch (error) {
         console.error("Error fetching user data:", error);
@@ -44,7 +44,7 @@ const Dashboard = () => {
   return (
     <section className="dashboard">
       <div>
-        <h2>Welcome {user ? user.username : "Guest"}</h2>
+        <h2>Welcome {userData ? userData.username : "Guest"}</h2>
         <p>Your upcoming games:</p>
       </div>
       <div className="upcoming-games">
