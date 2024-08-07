@@ -1,23 +1,26 @@
 import React, { useState } from "react";
-import axios from "axios";
+// import axios from "axios";
+import axios from "../axios"; // axios instance is imported from axios.js
+// import { API_BASE_URL } from "../config";
+
 // import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
+  // const API_BASE_URL = process.env.REACT_APP_SERVER_URL; *use top import instead
+  // ${API_BASE_URL}
+
   // const navigate = useNavigate(); // to redirect
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post(
-        `https://gameplan-backend.onrender.com/user/login`,
-        {
-          username,
-          password,
-        }
-      );
+      const response = await axios.post(`/user/login`, {
+        username,
+        password,
+      });
       console.log("Login successful:", response.data);
       // Handle successful login (e.g., store token, redirect user)
       const data = await response.data;

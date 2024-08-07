@@ -1,6 +1,7 @@
 // RegisterForm.js
 import React, { useState } from "react";
-import axios from "axios";
+import axios from "../axios"; // axios instance is imported from axios.js
+// import { API_BASE_URL } from "../config";
 
 const RegisterForm = () => {
   const [username, setUsername] = useState("");
@@ -9,6 +10,8 @@ const RegisterForm = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [location, setLocation] = useState("");
   const [error, setError] = useState(null);
+  // const API_BASE_URL = process.env.REACT_APP_SERVER_URL; *use top import instead
+  // ${API_BASE_URL}
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -21,7 +24,9 @@ const RegisterForm = () => {
 
     try {
       const response = await axios.post(
-        `https://gameplan-backend.onrender.com/user/register`,
+        // `${API_BASE_URL}/user/register`,
+        // `https://gameplan-backend.onrender.com/user/register`,
+        `/user/register`,
         {
           username,
           email,
