@@ -5,7 +5,7 @@ const EditProfile = () => (
 
     <form id="edit-profile" action="/submit" method="post">
       <div className="form-field">
-        <label htmlForfor="username">Username:</label>
+        <label htmlFor="username">Username:</label>
         <input type="text" id="username" name="username" required />
       </div>
 
