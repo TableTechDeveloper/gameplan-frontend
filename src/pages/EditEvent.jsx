@@ -12,8 +12,8 @@ import FailModal from '../modals/FailModal';
 
 const EditEvent = () => {
     const { id } = useParams();
-    const { loading: gamesLoading, error: gamesError } = useFetchGames();
-    const { event, loading: eventLoading, error: eventError } = useFetchSingleEvent(id);
+    const { games, loading: gamesLoading, error: gamesError } = useFetchGames();
+    const { event, loading: eventLoading, error: eventError, fetchEvent } = useFetchSingleEvent(id);
     const [selectedGame, setSelectedGame] = useState('');
     const [gameDetails, setGameDetails] = useState({ duration: '', minPlayers: '', maxPlayers: '', image: '', thumbnail: '' });
     const [eventDate, setEventDate] = useState(new Date());
@@ -46,6 +46,25 @@ const EditEvent = () => {
             setGameId(event.game._id);
         }
     }, [event]);
+
+    const handleGameChange = (e) => {
+        const gameName = e.target.value;
+        setSelectedGame(gameName);
+        const game = games.find(g => g.name === gameName);
+        if (game) {
+            setGameId(game._id);
+            setGameDetails({
+                duration: game.playtime,
+                minPlayers: game.minplayers,
+                maxPlayers: game.maxplayers,
+                image: game.image,
+                thumbnail: game.thumbnail
+            });
+        } else {
+            setGameId('');
+            setGameDetails({ duration: '', minPlayers: '', maxPlayers: '', image: '', thumbnail: '' });
+        }
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -107,46 +126,49 @@ const EditEvent = () => {
                         required
                     />
                 </div>
-                <div className="form-field">
-                    <label htmlFor="game">Selected Game:</label>
-                    <input
-                        type="text"
-                        id="game"
-                        name="game"
-                        value={selectedGame}
-                        readOnly
-                    />
-                </div>
+                <h2>Select a game:</h2>
+                <input
+                    type="text"
+                    list="games"
+                    value={selectedGame}
+                    onChange={handleGameChange}
+                    placeholder="Search for a game"
+                />
+                <datalist id="games">
+                    {games.map(game => (
+                        <option key={game._id} value={game.name}>
+                            {game.name}
+                        </option>
+                    ))}
+                </datalist>
                 <div className="form-field">
                     <label htmlFor="gameDuration">Game Duration:</label>
                     <input
-                        type="text"
+                        type="number"
                         id="game-duration"
                         name="gameduration"
                         value={gameDetails.duration}
-                        readOnly
+                        onChange={(e) => setGameDetails({ ...gameDetails, duration: e.target.value })}
                     />
                 </div>
                 <div className="form-field">
                     <label htmlFor="minParticipants">Min Participants:</label>
                     <input
-                        type="text"
+                        type="number"
                         id="min-participants"
                         name="minparticipants"
-                        value={minParticipants || gameDetails.minPlayers}
+                        value={minParticipants}
                         onChange={(e) => setMinParticipants(e.target.value)}
-                        required
                     />
                 </div>
                 <div className="form-field">
                     <label htmlFor="maxParticipants">Max Participants:</label>
                     <input
-                        type="text"
+                        type="number"
                         id="max-participants"
                         name="maxparticipants"
-                        value={maxParticipants || gameDetails.maxPlayers}
+                        value={maxParticipants}
                         onChange={(e) => setMaxParticipants(e.target.value)}
-                        required
                     />
                 </div>
                 <div className="form-field">

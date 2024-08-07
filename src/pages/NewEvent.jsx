@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -118,17 +116,17 @@ const NewEvent = () => {
                 <div className="form-field">
                     <label htmlFor="gameDuration">Game Duration:</label>
                     <input
-                        type="text"
+                        type="number"
                         id="game-duration"
                         name="gameduration"
                         value={gameDetails.duration}
-                        readOnly
+                        onChange={(e) => setGameDetails({ ...gameDetails, duration: e.target.value })}
                     />
                 </div>
                 <div className="form-field">
                     <label htmlFor="minParticipants">Min Participants:</label>
                     <input
-                        type="text"
+                        type="number"
                         id="min-participants"
                         name="minparticipants"
                         value={minParticipants || gameDetails.minPlayers}
@@ -139,7 +137,7 @@ const NewEvent = () => {
                 <div className="form-field">
                     <label htmlFor="maxParticipants">Max Participants:</label>
                     <input
-                        type="text"
+                        type="number"
                         id="max-participants"
                         name="maxparticipants"
                         value={maxParticipants || gameDetails.maxPlayers}

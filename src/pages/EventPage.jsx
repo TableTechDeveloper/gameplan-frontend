@@ -25,15 +25,8 @@ const EventPage = () => {
             <div className="event-header">
                 <div className="event-details">
                     <h1>{event.title}</h1>
-                    <div id="host-details">
-                        <div id="profile-photo"></div>
-                        <div id="host-name">
-                            <h3>Hosted By:</h3>
-                            <p>{event.host && event.host.username}</p>
-                        </div>
-                    </div>
+                    <h3>Hosted By: {event.host && event.host.username}</h3>
                 </div>
-                <div className="traffic-light">traffic light</div>
             </div>
             <div className="game-image" id="eventpage-gameimage">
                 {event.gameImage && <img src={event.gameImage} alt={`${event.title} cover`} />}
@@ -42,8 +35,6 @@ const EventPage = () => {
             <p>{formattedDate}</p>
             <h3>Location:</h3>
             <p>{event.location}</p>
-            <h3>Info:</h3>
-            <p>{event.info}</p>
             <h3>Guests Attending:</h3>
             {event.participants && event.participants.map(participant => (
                 <p key={participant._id}>{participant.username}</p>
