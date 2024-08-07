@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 import axios from "../axios";
 
 const Dashboard = () => {
-  const [user, setUser] = useState(null);
+  const [userData, setUserData] = useState(null);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -24,7 +24,7 @@ const Dashboard = () => {
           },
         });
 
-        setUser(response.data);
+        setUserData(response.data);
         console.log("Fetched user data:", response.data);
       } catch (error) {
         console.error("Error fetching user data:", error);
