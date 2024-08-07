@@ -9,6 +9,9 @@ const RegisterForm = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [location, setLocation] = useState("");
+  const [securityQuestionOne, setSecurityQuestionOne] = useState("");
+  const [securityQuestionTwo, setSecurityQuestionTwo] = useState("");
+  const [securityQuestionThree, setSecurityQuestionThree] = useState("");
   const [error, setError] = useState(null);
   // const API_BASE_URL = process.env.REACT_APP_SERVER_URL; *use top import instead
   // ${API_BASE_URL}
@@ -32,6 +35,9 @@ const RegisterForm = () => {
           email,
           password,
           location,
+          securityQuestionOne,
+          securityQuestionTwo,
+          securityQuestionThree,
         },
         {
           headers: {
@@ -57,6 +63,9 @@ const RegisterForm = () => {
       setPassword("");
       setConfirmPassword("");
       setLocation("");
+      setSecurityQuestionOne("");
+      setSecurityQuestionTwo("");
+      setSecurityQuestionThree("");
       setError(null);
 
       // Handle successful register (e.g., store token, redirect user)
@@ -118,6 +127,30 @@ const RegisterForm = () => {
           type="text"
           value={location}
           onChange={(e) => setLocation(e.target.value)}
+        />
+      </div>
+      <div>
+        <label>Security Question 1:</label>
+        <input
+          type="text"
+          value={securityQuestionOne}
+          onChange={(e) => setSecurityQuestionOne(e.target.value)}
+        />
+      </div>
+      <div>
+        <label>Security Question 2:</label>
+        <input
+          type="text"
+          value={securityQuestionTwo}
+          onChange={(e) => setSecurityQuestionTwo(e.target.value)}
+        />
+      </div>
+      <div>
+        <label>Security Question 3:</label>
+        <input
+          type="text"
+          value={securityQuestionThree}
+          onChange={(e) => setSecurityQuestionThree(e.target.value)}
         />
       </div>
       {error && <div className="error-message">{error}</div>}{" "}
