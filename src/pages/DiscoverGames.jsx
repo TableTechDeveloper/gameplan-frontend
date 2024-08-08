@@ -8,6 +8,9 @@ const DiscoverGames = () => {
     const [gameData, setGameData] = useState(null);
     const [error, setError] = useState(null);
 
+    const API_BASE_URL = process.env.REACT_APP_SERVER_URL;
+    // ${API_BASE_URL}
+
     // Replace 'YourJWTTokenHere' with the actual token
     const token = localStorage.getItem('authToken');
 
@@ -16,7 +19,7 @@ const DiscoverGames = () => {
     const handleSearch = async (event) => {
         event.preventDefault();
         try {
-            const response = await axios.get(`http://localhost:3000/games/search?query=${query}&strict=true`, {
+            const response = await axios.get(`${API_BASE_URL}/games/search?query=${query}&strict=true`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }

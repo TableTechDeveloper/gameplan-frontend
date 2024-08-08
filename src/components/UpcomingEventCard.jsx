@@ -1,37 +1,26 @@
-import React, { useContext } from 'react';
-import { ModalContext } from '../pages/_TemplatePage';
-import ConfirmModal from "../modals/ConfirmModal"
+import React from 'react';
 import { NavLink } from 'react-router-dom';
-import "../styles/Card.css"
+import { formatDateTime } from '../utils/dateUtils';
+import "../styles/Card.css";
 
-const UpcomingEventCard = () => {
-    const { openModal } = useContext(ModalContext);
-
-    const handleLeaveEvent = () => {
-        // Logic for joining the event
-        openModal(<ConfirmModal message="leave this event" />);
-    };
+const UpcomingEventCard = ({ event, onLeaveEvent }) => {
+    const formattedDate = formatDateTime(event.eventDate);
 
     return (
-        
-        <div className='card'>
-            
-            <div>
-                <h3>Event Name</h3>
-                <p>Date and Time</p>
-                <p>Location</p>
-                <p>Host</p>
-                <p>Players</p>
-                <div>Edit Event</div>
-                <div>Leave Event</div>
-                <NavLink to="/newevent">
-                    <button className="button-secondary">Edit Event</button>
-                </NavLink>
-                <button className="button-cancel" onClick={handleLeaveEvent}>Leave Event</button>
+        <NavLink to={`/events/${event._id}`} className="card-link">
+            <div className='card'>
+                <div>
+                    <h3>{event.title}</h3>
+                    <h4>Host: {event.host.username}</h4>
+                    <p>{formattedDate}</p>
+                    <p>{event.location}</p>
+                    <p>Players: {event.participants.length}/{event.maxParticipants}</p>
+                </div>
+                <div className='game-image'>
+                    {event.gameImage ? <img src={event.gameImage} alt={`${event.title} cover`} /> : 'No image available'}
+                </div>
             </div>
-            <div className='game-image'>image</div>
-        </div>
-
+        </NavLink>
     );
 };
 

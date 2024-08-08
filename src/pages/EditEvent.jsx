@@ -1,13 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect, useContext } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import useFetchGames from '../functions/useFetchGames';
+import useFetchSingleEvent from '../functions/useFetchSingleEvent';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { API_BASE_URL, getToken } from '../config';
+import { ModalContext } from '../pages/_TemplatePage';
+import SuccessModal from '../modals/SuccessModal';
+import FailModal from '../modals/FailModal';
 
-const NewEvent = () => {
-    const { games, loading, error } = useFetchGames();
+const EditEvent = () => {
+    const { id } = useParams();
+    const { games, loading: gamesLoading, error: gamesError } = useFetchGames();
+    const { event, loading: eventLoading, error: eventError, fetchEvent } = useFetchSingleEvent(id);
     const [selectedGame, setSelectedGame] = useState('');
     const [gameDetails, setGameDetails] = useState({ duration: '', minPlayers: '', maxPlayers: '', image: '', thumbnail: '' });
     const [eventDate, setEventDate] = useState(new Date());
@@ -16,13 +22,37 @@ const NewEvent = () => {
     const [isPublic, setIsPublic] = useState(true);
     const [minParticipants, setMinParticipants] = useState('');
     const [maxParticipants, setMaxParticipants] = useState('');
-    const [gameId, setGameId] = useState(''); // State to store game ID
+    const [gameId, setGameId] = useState('');
     const navigate = useNavigate();
+    const { openModal } = useContext(ModalContext);
 
     useEffect(() => {
-        const game = games.find(g => g.name === selectedGame);
+        if (event) {
+            console.log('Event data:', event); // Debugging
+            setTitle(event.title);
+            setSelectedGame(event.game.name); // Set the game name
+            setEventDate(new Date(event.eventDate));
+            setLocation(event.location);
+            setIsPublic(event.isPublic);
+            setMinParticipants(event.minParticipants);
+            setMaxParticipants(event.maxParticipants);
+            setGameDetails({
+                duration: event.gamelength,
+                minPlayers: event.minParticipants,
+                maxPlayers: event.maxParticipants,
+                image: event.gameImage,
+                thumbnail: event.gameThumbnail
+            });
+            setGameId(event.game._id);
+        }
+    }, [event]);
+
+    const handleGameChange = (e) => {
+        const gameName = e.target.value;
+        setSelectedGame(gameName);
+        const game = games.find(g => g.name === gameName);
         if (game) {
-            setGameId(game._id); // Store game ID
+            setGameId(game._id);
             setGameDetails({
                 duration: game.playtime,
                 minPlayers: game.minplayers,
@@ -31,26 +61,21 @@ const NewEvent = () => {
                 thumbnail: game.thumbnail
             });
         } else {
-            setGameId(''); // Clear game ID if no game is selected
+            setGameId('');
             setGameDetails({ duration: '', minPlayers: '', maxPlayers: '', image: '', thumbnail: '' });
         }
-    }, [selectedGame, games]);
-
-    const handleGameChange = (e) => {
-        setSelectedGame(e.target.value);
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         const eventData = {
             title,
-            game: gameId, // Use game ID
+            game: gameId,
             duration: gameDetails.duration,
             minParticipants: minParticipants || gameDetails.minPlayers,
             maxParticipants: maxParticipants || gameDetails.maxPlayers,
             eventDate,
             location,
-            // description,
             isPublic,
             isPublished: true,
             gameImage: gameDetails.image,
@@ -59,33 +84,36 @@ const NewEvent = () => {
 
         try {
             const token = getToken();
-            const response = await axios.post(`${API_BASE_URL}/events/new`, eventData, {
+            const response = await axios.patch(`${API_BASE_URL}/events/${id}`, eventData, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
             });
 
-            const newEventId = response.data.newEvent._id; // Assuming the new event's ID is returned in response.data.newEvent._id
-            navigate(`/events/${newEventId}`);
+            openModal(<SuccessModal message={`Event ${response.data.event.title} updated successfully!`} />);
+            navigate(`/events/${id}`);
         } catch (error) {
             if (error.response) {
                 console.error('Error response data:', error.response.data);
                 console.error('Error response status:', error.response.status);
                 console.error('Error response headers:', error.response.headers);
+                openModal(<FailModal message={`Failed to update the event: ${error.response.data.message}`} />);
             } else if (error.request) {
                 console.error('Error request:', error.request);
+                openModal(<FailModal message="Failed to update the event. Please try again later." />);
             } else {
                 console.error('Error message:', error.message);
+                openModal(<FailModal message={`Failed to update the event: ${error.message}`} />);
             }
         }
     };
 
-    if (loading) return <p>Loading...</p>;
-    if (error) return <p>{error}</p>;
+    if (gamesLoading || eventLoading) return <p>Loading...</p>;
+    if (gamesError || eventError) return <p>{gamesError || eventError}</p>;
 
     return (
         <section className="NewEvent">
-            <h1>New Event</h1>
+            <h1>Edit Event</h1>
             <form id="new-event" onSubmit={handleSubmit}>
                 <div className="form-field">
                     <label htmlFor="title">Event Title:</label>
@@ -129,9 +157,8 @@ const NewEvent = () => {
                         type="number"
                         id="min-participants"
                         name="minparticipants"
-                        value={minParticipants || gameDetails.minPlayers}
+                        value={minParticipants}
                         onChange={(e) => setMinParticipants(e.target.value)}
-                        required
                     />
                 </div>
                 <div className="form-field">
@@ -140,9 +167,8 @@ const NewEvent = () => {
                         type="number"
                         id="max-participants"
                         name="maxparticipants"
-                        value={maxParticipants || gameDetails.maxPlayers}
+                        value={maxParticipants}
                         onChange={(e) => setMaxParticipants(e.target.value)}
-                        required
                     />
                 </div>
                 <div className="form-field">
@@ -190,10 +216,10 @@ const NewEvent = () => {
                         <label htmlFor="game-public">Public</label>
                     </div>
                 </div>
-                <button type="submit" className="button-primary">Create Event</button>
+                <button type="submit" className="button-primary">Update Event</button>
             </form>
         </section>
     );
 };
 
-export default NewEvent;
+export default EditEvent;

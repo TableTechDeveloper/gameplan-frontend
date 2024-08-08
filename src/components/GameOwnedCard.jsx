@@ -1,24 +1,24 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import axios from 'axios';
 import { ModalContext } from '../pages/_TemplatePage';
 import "../styles/Card.css";
 import SuccessModal from '../modals/SuccessModal';
 import FailModal from '../modals/FailModal';
 import ConfirmModal from '../modals/ConfirmModal';
+import { API_BASE_URL, getToken } from '../config';
 
 const GameOwnedCard = ({ gameId, name, minPlayers, maxPlayers, playtime, image, onRemoveGame }) => {
     const { openModal, closeModal } = useContext(ModalContext);
-    const [showConfirmModal, setShowConfirmModal] = useState(false);
 
     const handleRemoveGame = async () => {
         try {
-            const token = localStorage.getItem('authToken');
+            const token = getToken();
             if (!token) {
                 openModal(<FailModal message="You are not authenticated!" />);
                 return;
             }
 
-            const response = await axios.delete(`http://localhost:3000/user/collection/${gameId}`, {
+            const response = await axios.delete(`${API_BASE_URL}/user/collection/${gameId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -31,8 +31,6 @@ const GameOwnedCard = ({ gameId, name, minPlayers, maxPlayers, playtime, image, 
         } catch (error) {
             console.error('Error removing game:', error);
             openModal(<FailModal message="Failed to remove the game." />);
-        } finally {
-            setShowConfirmModal(false);
         }
     };
 
@@ -51,11 +49,11 @@ const GameOwnedCard = ({ gameId, name, minPlayers, maxPlayers, playtime, image, 
 
     return (
         <div className="card">
-            <div>
+            <div className="card-details">
                 <h3>{name}</h3>
-                <h4>Min-Players: {minPlayers}</h4>
-                <h4>Max-Players: {maxPlayers}</h4>
-                <h4>Playtime: {playtime} minutes</h4>
+                <p>Min Players: {minPlayers}</p>
+                <p>Max Players: {maxPlayers}</p>
+                <p>Playtime: {playtime} minutes</p>
                 <button className="button-cancel" onClick={handleConfirmClick}>Remove Game</button>
             </div>
             <div className='game-image'>

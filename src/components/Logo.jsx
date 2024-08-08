@@ -7,7 +7,7 @@ const Logo = ({ toggleMenu }) => {
       };
     
     return (
-        <NavLink to="/" onClick={handleClick}>
+        <NavLink to="/dashboard" onClick={handleClick}>
             <div className="logo">
                 <h5>LOGO</h5>
             </div>
