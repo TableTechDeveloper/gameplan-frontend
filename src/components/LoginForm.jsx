@@ -1,18 +1,12 @@
 import React, { useState } from "react";
-// import axios from "axios";
 import axios from "../axios"; // axios instance is imported from axios.js
-// import { API_BASE_URL } from "../config";
+import { useNavigate } from "react-router-dom";
 
-// import { useNavigate } from "react-router-dom";
-
-const LoginForm = () => {
+const LoginForm = ({ onLoginSuccess }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
-  // const API_BASE_URL = process.env.REACT_APP_SERVER_URL; *use top import instead
-  // ${API_BASE_URL}
-
-  // const navigate = useNavigate(); // to redirect
+  const navigate = useNavigate();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -38,9 +32,7 @@ const LoginForm = () => {
       setPassword("");
       setError(null);
 
-      // Redirect user to the page they were trying to access before logging in
-      // closeLoginModal();
-      // navigate(location.state.from);
+      navigate("/dashboard");
     } catch (error) {
       console.error("Error logging in:", error);
       // Handle login error
