@@ -1,14 +1,15 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 import GameOwnedCard from '../components/GameOwnedCard';
-import { UserContext } from '../context/UserContext';
+
 import useFetchGames from '../functions/useFetchGames';
+import UserIcon from '../components/UserIcon';
 
 const GamesOwned = () => {
-    const { user, loading: userLoading } = useContext(UserContext);
+
     const { games, loading, error, removeGame } = useFetchGames();
 
-    if (loading || userLoading) {
+    if (loading) {
         return <p>Loading...</p>;
     }
 
@@ -17,13 +18,18 @@ const GamesOwned = () => {
     }
 
     return (
-        <section className="games-owned">
-            <h2>My Games:</h2>
-            <p>Welcome, {user ? user.username : 'Guest'}!</p>
-            <NavLink to="/discovergames">
-                <button className="button-primary">Discover Games</button>
-            </NavLink>
-            <div>
+        <section className="page-section">
+            <div className="page-top">
+                <div>
+                    <h1>My Games:</h1>
+                    <UserIcon />
+                </div>
+                <NavLink to="/discovergames">
+                    <button className="button-primary">Discover Games</button>
+                </NavLink>
+            </div>
+            <div className="page-content">
+                <h2>Your owned games:</h2>
                 {games.map((game) => (
                     <GameOwnedCard 
                         key={game._id}

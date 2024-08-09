@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import Logo from './Logo';
 import { ModalContext } from '../pages/_TemplatePage';
 import '../styles/Header.css';
 import SignUpModal from '../modals/SignUpModal';
@@ -21,9 +20,10 @@ const HomeHeader = () => {
 
   return (
     <header className="home-header">
-      <Logo />
-      <button id="login" onClick={handleLoginClick}>Login</button>
-      <button id="signup" onClick={handleSignUpClick}>Sign Up</button>
+      <div className="home-header-buttons">
+        <button className="button-secondary" onClick={handleLoginClick}>Login</button>
+        <button className="button-primary" onClick={handleSignUpClick}>Sign Up</button>
+      </div>
     </header>
   );
 };

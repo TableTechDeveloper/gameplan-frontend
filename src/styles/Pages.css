@@ -1,0 +1,97 @@
+/* Pages and page specific styles */
+.page-section {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding-top: 40px;
+}
+
+.home-page {
+    display: flex;
+    justify-content: center;
+}
+
+
+#game-search-result {
+    margin-top: 0px;
+}
+
+.eventpage-gameimage {
+    height: 200px;
+    background-size: cover; /* Cover the container */
+    background-position: top; /* Center the image */
+    background-repeat: no-repeat; /* Prevent tiling */
+    overflow: hidden;
+}
+
+/* New Event radio buttons */
+.radio-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+
+.radio-buttons label {
+    font-size: 1rem;
+}
+
+.radio-button {
+    height: 50px;
+    width: 50px;
+    accent-color: var(--color-theme2);
+}
+
+
+/* TABLET BREAK SIZE */
+@media only screen and (min-width: 740px) {
+
+    .page-top {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .page-top button {
+        width: 300px;
+        height: 80px;
+        font-size: 2rem;
+    } 
+    
+}
+
+/* DESKTOP BREAK SIZE */
+@media only screen and (min-width: 1024px) {
+    
+    .page-section {
+        /* flex-direction: row; */
+        align-content: stretch;
+        justify-content: space-between;
+    }
+
+    #discover-games {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .game-search,
+    .game-results {
+        flex-basis: 45%;
+    }
+
+
+   
+    .upcoming-games {
+        flex-basis: 60%;
+    }
+
+   
+    #dash-new-game-button {
+        display: block;
+    }
+
+    #button-homepage {
+        max-width: 500px;
+    }
+
+
+}

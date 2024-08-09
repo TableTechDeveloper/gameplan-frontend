@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import dice from "../assets/dice.svg";
 
 const Logo = ({ toggleMenu }) => {
     const handleClick = () => {
@@ -9,7 +10,7 @@ const Logo = ({ toggleMenu }) => {
     return (
         <NavLink to="/dashboard" onClick={handleClick}>
             <div className="logo">
-                <h5>LOGO</h5>
+                <img src={dice} alt="placeholder" id="header-logo"/>
             </div>
         </NavLink>
     );

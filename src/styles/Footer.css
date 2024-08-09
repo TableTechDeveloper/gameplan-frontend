@@ -2,8 +2,23 @@ footer {
     padding: var(--global-margin);
     background-color: var(--footer-color);
     color: var(--footer-text);
-    width: 100;
+    width: auto;
     display: flex;
     justify-content: center;
     flex-shrink: 0;
+    padding: 10px;
+    gap: 10px
+}
+
+footer .img-bluepiece {
+    height: 30px;
+}
+
+footer .img-redpiece {
+    height: 30px;
+}
+
+footer h3 {
+    color: var(--color-grey2);
+    letter-spacing: 0.3rem;
 }

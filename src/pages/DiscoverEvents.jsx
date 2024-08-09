@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import useFetchPublicEvents from '../functions/useFetchPublicEvents';
+import UserIcon from '../components/UserIcon';
 import UpcomingEventCard from "../components/UpcomingEventCard";
 
 const DiscoverEvents = () => {
@@ -15,18 +16,20 @@ const DiscoverEvents = () => {
     }
 
     return (
-        <section className="MyEvents">
-            <h2>Discover Events:</h2>
-            <div>
-                <NavLink to="/newevent">
-                    <button className="button-primary">New Event</button>
-                </NavLink>
-                <NavLink to="/mydrafts">
-                    <button className="button-secondary">View Drafts</button>
-                </NavLink>
+        <section className="page-section">
+            <div className="page-top">
+                <div>
+                    <h1>Discover Events:</h1>
+                    <UserIcon />
+                </div>
+                <div className="page-buttons">
+                    <NavLink to="/newevent">
+                        <button className="button-primary">New Event</button>
+                    </NavLink>
+                </div>
             </div>
-            <h2>Upcoming events:</h2>
-            <div>
+            <div className="page-content">
+                <h3>Upcoming events:</h3>
                 {events.map(event => (
                     <UpcomingEventCard 
                         key={event._id}

@@ -1,15 +1,14 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { UserContext } from '../context/UserContext';
+import UserIcon from '../components/UserIcon';
 import useFetchEvents from "../functions/useFetchEvents";
 import UpcomingEventCard from "../components/UpcomingEventCard";
 
 
 const MyEvents = () => {
-    const { user, loading: userLoading } = useContext(UserContext);
     const { events, loading, error } = useFetchEvents(true);
 
-    if (loading || userLoading) {
+    if (loading) {
         return <p>Loading...</p>;
     }
 
@@ -18,18 +17,32 @@ const MyEvents = () => {
     }
 
     return (
-        <section className="my-events">
-            <h2>My Events</h2>
-            <p>Welcome, {user ? user.username : 'Guest'}!</p>
-            <NavLink to="/discoverevents">
-                <button className="button-primary">Discover Events</button>
-            </NavLink>
-            <h3>Hosted Events:</h3>
-            <div className="event-list">
-                {events.map(event => (
-                    <UpcomingEventCard key={event._id} event={event} />
-                ))}
+        <section className="page-section">
+            <div className="page-top">
+                <div>
+                    <h1>My Events:</h1>
+                    <UserIcon />
+                </div>
+                <div className="page-buttons"> 
+                    <NavLink to="/discoverevents">
+                        <button className="button-primary">Discover Events</button>
+                    </NavLink>
+                    <NavLink to="/newevent">
+                        <button className="button-secondary">New Event</button>
+                    </NavLink>
+                </div>
             </div>
+            <div className="page-content">
+                <h3>Hosted Events:</h3>
+                <div className="event-list">
+                    {events.map(event => (
+                        <UpcomingEventCard 
+                        key={event._id} 
+                        event={event} />
+                    ))}
+                </div>
+            </div>
+
         </section>
     );
 };

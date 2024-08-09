@@ -1,15 +1,15 @@
 import React from 'react';
 import useFetchEvents from "../functions/useFetchEvents";
-import useFetchUser from "../functions/useFetchUser";
 import UpcomingEventCard from "../components/UpcomingEventCard";
+import UserIcon from '../components/UserIcon';
+import { NavLink } from 'react-router-dom';
 
 
 const Dashboard = () => {
 
     const { events, loading: eventsLoading, error: eventsError } = useFetchEvents(false); // Set hosted to false
-    const { user, loading: userLoading, error: userError } = useFetchUser();
 
-    if (eventsLoading || userLoading) {
+    if (eventsLoading) {
         return <div>Loading...</div>;
     }
 
@@ -17,17 +17,21 @@ const Dashboard = () => {
         return <div>{eventsError}</div>;
     }
 
-    if (userError) {
-        return <div>{userError}</div>;
-    }
-
     return (
-        <section className="dashboard">
-            <div>
-                <h2>Welcome {user ? user.username : 'Guest'}</h2>
-                <p>Your upcoming games:</p>
+        <section className="page-section">
+            <div className="page-top">
+                <div>
+                    <h1>Dashboard:</h1>
+                    <UserIcon />
+                </div>
+                <div className="page-buttons">
+                    <NavLink to="/newevent">
+                        <button className="button-primary">New Event</button>
+                    </NavLink>
+                </div>
             </div>
-            <div className="upcoming-games">
+            <div className="page-content">
+                <h2>Your upcoming events:</h2>
                 {events.map(event => (
                     <UpcomingEventCard 
                         key={event._id}
