@@ -1,6 +1,7 @@
 /* Card.css */
 .card {
     display: flex;
+    position: relative;
     align-items: stretch;
     margin: 20px 0;
     justify-content: space-between;
@@ -11,19 +12,24 @@
     height: auto;
 }
 
+.card-info {
+    flex-basis: 60%;
+    padding-right: 10px;
+}
+
 .game-image {
-    width: 150px;
-    height: 150px; /* Add a fixed height */
+    position: absolute;
+    right: 0;
+    top: 0; 
+    bottom: 0;
+    width: 130px;
     background-color: var(--color-grey1);
-    display: flex;
-    justify-content: center;
-    align-items: center;
     overflow: hidden;
 }
 
 .game-image img {
-    min-width: 100%;
-    min-height: 100%;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
 }
 
@@ -32,4 +38,22 @@
     font-size: 1rem;
     padding: 0;
     height: 40px;
+}
+
+/* TABLET BREAK SIZE */
+@media only screen and (min-width: 740px) {
+    .game-image {
+        width: 300px;
+    }
+}
+
+/* DESKTOP BREAK SIZE */
+@media only screen and (min-width: 1024px) {
+    .card-info {
+        padding: 10px;
+    }
+
+    .game-image {
+        width: 500px;
+    }
 }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import GameSearchCard from "../components/GameSearchCard";
 import { NavLink } from 'react-router-dom';
+import fetchGameSearch from "../functions/fetchGameSearch";
 
 const DiscoverGames = () => {
     const [query, setQuery] = useState('');
@@ -9,55 +9,46 @@ const DiscoverGames = () => {
     const [error, setError] = useState(null);
 
     const API_BASE_URL = process.env.REACT_APP_SERVER_URL;
-    // ${API_BASE_URL}
 
-    // Replace 'YourJWTTokenHere' with the actual token
+    // Fetch the JWT token from localStorage
     const token = localStorage.getItem('authToken');
 
-    console.log("API Token:", token);
-
-    const handleSearch = async (event) => {
+    const handleSearch = (event) => {
         event.preventDefault();
-        try {
-            const response = await axios.get(`${API_BASE_URL}/games/search?query=${query}&strict=true`, {
-                headers: {
-                    'Authorization': `Bearer ${token}`
-                }
-            });
-            setGameData(response.data.games); // Should be a single object in strict mode
-            setError(null);
-        } catch (error) {
-            console.error("Error fetching game data:", error);
-            setError(error.response?.data?.message || "An error occurred while searching for the game");
-        }
+        fetchGameSearch(query, API_BASE_URL, token, setGameData, setError);
     };
 
     return (
-        <section className="DiscoverGames">
-            <form onSubmit={handleSearch}>
-                <label htmlFor="search"><h2>Find a game:</h2></label>
-                <input
-                    type="search"
-                    id="search"
-                    name="query"
-                    value={query}
-                    onChange={(e) => setQuery(e.target.value)}
-                    placeholder="Enter your search query"
-                />
-                <button className="button-primary" type="submit">Search</button>
-            </form>
-            {error && <div className="error">{error}</div>}
-            <h2>Results:</h2>
-            <div className="game-search-results">
-                {gameData ? (
-                    <GameSearchCard game={gameData} />
-                ) : (
-                    <p>No games found</p>
-                )}
+        <section className="page-section">
+            <div>
+                <form onSubmit={handleSearch}>
+                    <label htmlFor="search"><h1>Find a game:</h1></label>
+                    <input
+                        type="search"
+                        id="search"
+                        name="query"
+                        value={query}
+                        onChange={(e) => setQuery(e.target.value)}
+                        placeholder="Enter your search query"
+                    />
+                    <button className="button-primary" type="submit">Search</button>
+                </form>
+                {error && <div className="error">{error}</div>}
             </div>
-            <NavLink to="/gamesowned">
-                <button className="button-secondary">My Games</button>
-            </NavLink>
+            <div>
+                <h1>Results:</h1>
+                <div className="game-search-results">
+                    {gameData ? (
+                        <GameSearchCard game={gameData} />
+                    ) : (
+                        <p>No games found</p>
+                    )}
+                </div>
+                <NavLink to="/gamesowned">
+                    <button className="button-secondary">My Games</button>
+                </NavLink>
+
+            </div>
         </section>
     );
 };

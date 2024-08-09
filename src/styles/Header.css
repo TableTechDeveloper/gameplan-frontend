@@ -1,5 +1,4 @@
-.header, .home-header {
-    max-width: 100%;
+.header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -8,43 +7,62 @@
     background-color: var(--color-grey1);
     padding: 10px 20px 10px 20px;
     height: 40px;
-
-}
-.logo {
-    background-color: var(--color-theme1);
-    height: 30px;
-    padding: 5px;
-    color: white;
-    border-radius: 10px;
-    transition: all 0.3s;
 }
 
-.logo:hover {
-    background-color: var(--color-theme1-dark);
+.home-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    position: relative;
+    background-color: var(--color-grey1);
+    padding: 10px 20px 10px 20px;
+    height: 40px;
 }
 
-.logo h5 {
-    margin: 0;
+.home-header-buttons {
+    display: flex;
+    justify-content: space-between;
+    max-width: 650px;
+    flex-grow: 1;
 }
+
 
 .home-header button {
-    height: 30px;
-    background-color: blue;
-    color: white;
-    border-radius: 5px;
-    border: none;
-    font-weight: 300;
-    font-size: 1.1rem;
-    padding: 10px 20px;
-    height: auto;
+    height: 40px;
+    font-size: 1.2rem;
+    max-width: 150px;
 }
 
-#login {
-    background-color: white;
-    color: black;
+#header-logo {
+    height: 50px;
 }
 
-#signup {
-    background-color: var(--color-theme1);
-    color: black;
+
+
+
+@media only screen and (min-width: 740px) {
+
+    .home-header {
+        height: 60px;
+    }
+
+    .home-header button {
+        height: 50px;
+        font-size: 1.5rem;
+        max-width: 180px;
+    }
+}
+
+
+@media only screen and (min-width: 1024px) {
+
+    .header, .home-header {
+        height: 80px;
+    }
+
+    #header-logo {
+        height: 70px;
+    }
+
 }

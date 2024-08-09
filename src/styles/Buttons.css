@@ -16,7 +16,8 @@ button {
 
 .button-primary {
     background-color: var(--color-theme1);
-    border: none;
+    border: solid;
+    border-color: var(--button-border-color);
     
     color: white;
 

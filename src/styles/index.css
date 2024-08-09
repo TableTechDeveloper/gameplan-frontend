@@ -1,7 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Lexend:wght@100..900&display=swap');
 @import "./Form.css";
 @import "./variables.css";
 @import "./TransitionWrapper.css";
 @import "./Buttons.css";
+@import "./Pages.css";
+@import "./Graphic.css";
+
+
+:root {
+  font-family: 'Lexend', sans-serif;
+}
 
 html {
   font-size: 16px;
@@ -9,11 +17,10 @@ html {
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: var(--font-family-base);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: var(--color-black);
 }
 
 code {
@@ -44,16 +51,20 @@ a {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  width: 100%;
-  max-width: var(--main-width);
+  /* width: auto; */
+  /* min-width: 400px; */
   position: relative;
   margin: 0 auto;
   padding: 0;
   box-sizing: border-box;
+
 }
 
 .main {
-  flex-grow: 1;
+  flex-grow: 1; /* makes it grow the HEIGHT of the page so the footer is at the bottom */
+  align-self: center;
+  width: 100%;
+  max-width: 1200px;
 }
 
 section {
@@ -61,9 +72,9 @@ section {
 }
 
 h1 {
-  font-size: 2.5rem;
+  font-size: 2.0rem;
   font-weight: 900;
-  margin: 0;
+  margin: 0px 0px 10px 0px;
 }
 
 h2 {
@@ -82,4 +93,40 @@ h4 {
 
 p {
   margin: 0px 0px 15px 0px;
+}
+
+
+@media only screen and (min-width: 740px) {
+
+
+}
+
+/* DESKTOP BREAK SIZE */
+@media only screen and (min-width: 1024px) {
+
+  h1 {
+    font-size: 3.0rem;
+  }
+
+  h2 {
+    font-size: 2.25rem;
+
+  }
+  
+  h3 {
+    font-size: 1.8rem;
+
+  }
+  h4 {
+    font-size: 1.5rem;
+
+  }
+  
+  p {
+    font-size: 1.2rem;
+
+  }
+
+  
+
 }

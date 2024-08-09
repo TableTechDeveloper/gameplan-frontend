@@ -9,7 +9,7 @@ const UpcomingEventCard = ({ event, onLeaveEvent }) => {
     return (
         <NavLink to={`/events/${event._id}`} className="card-link">
             <div className='card'>
-                <div>
+                <div className='card-info'>
                     <h3>{event.title}</h3>
                     <h4>Host: {event.host.username}</h4>
                     <p>{formattedDate}</p>

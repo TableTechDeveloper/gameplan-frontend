@@ -1,0 +1,36 @@
+
+
+.gameplan-graphic {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 600px;
+    gap: 15px;
+    padding: 30px 20px;
+}
+
+.gameplan-graphic h1 {
+    font-size: 50px;
+}
+
+.gameplan-graphic h2 {
+    text-align: center;
+}
+
+.img-dice {
+    width: 200px;
+}
+
+.img-redpiece,
+.img-bluepiece {
+    height: 100px;
+}
+
+.img-redpiece {
+    /* transform: rotate(5deg); */
+}
+
+.img-bluepiece {
+    transform: rotate(-15deg);
+}
+

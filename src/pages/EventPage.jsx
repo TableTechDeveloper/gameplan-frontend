@@ -28,8 +28,8 @@ const EventPage = () => {
                     <h3>Hosted By: {event.host && event.host.username}</h3>
                 </div>
             </div>
-            <div className="game-image" id="eventpage-gameimage">
-                {event.gameImage && <img src={event.gameImage} alt={`${event.title} cover`} />}
+            <div className="eventpage-gameimage">
+                {/* {event.gameImage && <img src={event.gameImage} alt={`${event.title} cover`} />} */}
             </div>
             <h3>Date & Time:</h3>
             <p>{formattedDate}</p>

@@ -1,0 +1,72 @@
+.page-section {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding-top: 40px;
+}
+
+.home-page {
+    display: flex;
+    justify-content: center;
+}
+
+
+#game-search-result {
+    margin-top: 0px;
+}
+
+.eventpage-gameimage {
+    height: 200px;
+    background-color: cornflowerblue;
+    overflow: hidden;
+}
+
+
+/* TABLET BREAK SIZE */
+@media only screen and (min-width: 740px) {
+
+    .page-top {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .page-top button {
+        width: 300px;
+        height: 80px;
+        font-size: 2rem;
+    } 
+    
+}
+
+/* DESKTOP BREAK SIZE */
+@media only screen and (min-width: 1024px) {
+    
+    .page-section {
+        /* flex-direction: row; */
+        align-content: stretch;
+        justify-content: space-between;
+    }
+
+
+    .page-top button {
+        width: 400px;
+        height: 100px;
+        font-size: 2rem;
+    }    
+   
+    .upcoming-games {
+        flex-basis: 60%;
+    }
+
+   
+    #dash-new-game-button {
+        display: block;
+    }
+
+    #button-homepage {
+        max-width: 500px;
+    }
+
+
+}
