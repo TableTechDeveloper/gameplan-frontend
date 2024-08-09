@@ -56,21 +56,23 @@ const NewEvent = () => {
                         required
                     />
                 </div>
-                <h2>Select a game:</h2>
-                <input
-                    type="text"
-                    list="games"
-                    value={selectedGame}
-                    onChange={(e) => setSelectedGame(e.target.value)}
-                    placeholder="Search for a game"
-                />
-                <datalist id="games">
-                    {games.map(game => (
-                        <option key={game._id} value={game.name}>
-                            {game.name}
-                        </option>
-                    ))}
-                </datalist>
+                <div className="form-field">
+                    <label htmlFor="games">Select a game:</label>
+                    <input
+                        type="text"
+                        list="games"
+                        value={selectedGame}
+                        onChange={(e) => setSelectedGame(e.target.value)}
+                        placeholder="Search for a game"
+                    />
+                    <datalist id="games">
+                        {games.map(game => (
+                            <option key={game._id} value={game.name}>
+                                {game.name}
+                            </option>
+                        ))}
+                    </datalist>
+                </div>
                 <div className="form-field">
                     <label htmlFor="gameDuration">Game Duration:</label>
                     <input
