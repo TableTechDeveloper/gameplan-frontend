@@ -56,4 +56,10 @@
     .game-image {
         width: 500px;
     }
+
+    #game-search-card {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+    }
 }

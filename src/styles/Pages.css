@@ -48,6 +48,17 @@
         justify-content: space-between;
     }
 
+    #discover-games {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .game-search,
+    .game-results {
+        flex-basis: 45%;
+    }
+
+
 
     .page-top button {
         width: 400px;

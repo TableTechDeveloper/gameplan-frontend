@@ -19,8 +19,8 @@ const DiscoverGames = () => {
     };
 
     return (
-        <section className="page-section">
-            <div>
+        <section className="page-section" id="discover-games">
+            <div className="game-search">
                 <form onSubmit={handleSearch}>
                     <label htmlFor="search"><h1>Find a game:</h1></label>
                     <input
@@ -34,8 +34,11 @@ const DiscoverGames = () => {
                     <button className="button-primary" type="submit">Search</button>
                 </form>
                 {error && <div className="error">{error}</div>}
+                <NavLink to="/gamesowned">
+                    <button className="button-secondary">My Games</button>
+                </NavLink>
             </div>
-            <div>
+            <div className="game-results">
                 <h1>Results:</h1>
                 <div className="game-search-results">
                     {gameData ? (
@@ -44,10 +47,6 @@ const DiscoverGames = () => {
                         <p>No games found</p>
                     )}
                 </div>
-                <NavLink to="/gamesowned">
-                    <button className="button-secondary">My Games</button>
-                </NavLink>
-
             </div>
         </section>
     );

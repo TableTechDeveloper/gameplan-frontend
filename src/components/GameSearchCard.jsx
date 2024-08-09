@@ -33,8 +33,8 @@ const GameSearchCard = ({ game }) => {
     };
 
     return (
-        <div className='card'>
-            <div>
+        <div className="card" id="game-search-card">
+            <div className="game-info">
                 <h3>{game.name}</h3>
                 <h4>Min-Players: {game.minplayers}</h4>
                 <h4>Max-Players: {game.maxplayers}</h4>
