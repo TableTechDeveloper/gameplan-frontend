@@ -4,6 +4,8 @@
     --color-theme1-dark: #005b71;
     --color-theme2: #ff044d;
     --color-theme2-dark: #be013a;
+    --color-theme3: #ff8201;
+    --color-theme3-dark: #fc4600;
     --color-red: var(--color-theme2-dark);
     --color-grey1: #d9d9d9;
     --color-grey2: #636363;
