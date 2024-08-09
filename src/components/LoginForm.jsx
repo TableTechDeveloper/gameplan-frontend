@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "../axios"; // axios instance is imported from axios.js
 import { useNavigate } from "react-router-dom";
 
-const LoginForm = ({ onLoginSuccess }) => {
+const LoginForm = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
