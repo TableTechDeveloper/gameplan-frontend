@@ -27,6 +27,9 @@ const MyEvents = () => {
                     <NavLink to="/discoverevents">
                         <button className="button-primary">Discover Events</button>
                     </NavLink>
+                    <NavLink to="/newevent">
+                        <button className="button-secondary">New Event</button>
+                    </NavLink>
                 </div>
             </div>
             <div className="page-content">

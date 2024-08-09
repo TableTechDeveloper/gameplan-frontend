@@ -1,65 +1,122 @@
 /* Card.css */
 .card {
-    display: flex;
-    position: relative;
-    align-items: stretch;
+    display: grid;
+    grid-template-columns: 1fr; /* Single column */
+    grid-template-rows: auto auto auto; /* Three rows */
+    gap: 10px; /* Adjust spacing between items */
     margin: 20px 0;
-    justify-content: space-between;
     border-radius: var(--border-radius);
-    overflow: hidden;
     border: var(--border);
-    padding-left: 10px;
-    height: auto;
+    align-items: start; /* Align items to the start */
 }
 
 .card-info {
-    flex-basis: 60%;
+    grid-column: 1 / 2; /* Single column layout */
+    grid-row: 1; /* First row */
     padding-right: 10px;
 }
 
-.game-image {
-    position: absolute;
-    right: 0;
-    top: 0; 
-    bottom: 0;
-    width: 130px;
+.card-image {
+    grid-column: 1 / 2; /* Single column layout */
+    grid-row: 2; /* Second row */
+    width: 100%;
+    height: 150px;
+    border-radius: var(--border-radius);
     background-color: var(--color-grey1);
+    background-size: cover; /* Cover the container */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Prevent tiling */
     overflow: hidden;
 }
 
-.game-image img {
+.card-button {
+    grid-column: 1 / 2; /* Single column layout */
+    grid-row: 3; /* Third row */
     width: 100%;
-    height: 100%;
-    object-fit: cover;
+    justify-self: start; /* Align the button to the start */
 }
 
-.card button {
-    margin: 20px 0px 0px -10px;
-    font-size: 1rem;
-    padding: 0;
+.card-button button {
+    margin: 0px;
     height: 40px;
+    font-size: 1.2rem;
 }
 
-/* TABLET BREAK SIZE */
+/* TABLET AND DESKTOP BREAKPOINTS */
 @media only screen and (min-width: 740px) {
-    .game-image {
-        width: 300px;
+    .card {
+        grid-template-columns: 1fr 1fr; /* Two columns */
+        grid-template-rows: auto auto; /* Two rows */
     }
+
+    .card-info {
+        grid-column: 1 / 2; /* First column */
+        grid-row: 1; /* First row */
+    }
+
+    .card-image {
+        grid-column: 2 / 3; /* Second column */
+        grid-row: 1 / 3; /* Spans both rows */
+        width: 100%;
+        height: 100%;
+    }
+
+    .card-button {
+        grid-column: 1 / 2; /* First column */
+        grid-row: 2; /* Second row */
+        width: 100%;
+        max-width: none; /* Remove any max-width constraints */
+        justify-self: start; /* Align the button to the start */
+    }
+
+    .card-button button {
+        max-width: 250px;
+    }
+
+    
 }
 
 /* DESKTOP BREAK SIZE */
 @media only screen and (min-width: 1024px) {
-    .card-info {
-        padding: 10px;
-    }
-
-    .game-image {
-        width: 500px;
-    }
-
     #game-search-card {
-        display: flex;
-        flex-direction: column;
-        height: auto;
+        display: grid;
+        grid-template-columns: 1fr; /* Single column */
+        grid-template-rows: auto auto auto; /* Three rows */
+        gap: 20px; /* Adjust spacing between items */
+        margin: 20px 0;
+        border-radius: var(--border-radius);
+        border: var(--border);
+        align-items: start; /* Align items to the start */
+    }
+
+    #game-search-info {
+        grid-column: 1; /* Single column layout */
+        grid-row: 1; /* First row */
+        padding-right: 10px;
+    }
+    
+    #game-search-image {
+        grid-column: 1; /* Single column layout */
+        grid-row: 2; /* Second row */
+        width: 100%;
+        height: 200px;
+        border-radius: var(--border-radius);
+        background-color: var(--color-grey1);
+        background-size: cover; /* Cover the container */
+        background-position: center; /* Center the image */
+        background-repeat: no-repeat; /* Prevent tiling */
+        overflow: hidden;
+    }
+    
+    #game-search-add-button-div {
+        grid-column: 1; /* First column */
+        grid-row: 3; /* Second row */
+        width: 100%;
+        max-width: none; /* Remove any max-width constraints */
+        justify-self: start; /* Align the button to the start */
+    }
+
+    #game-search-add-button {
+        width: 100%;
     }
 }

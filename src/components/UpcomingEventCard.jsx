@@ -8,16 +8,19 @@ const UpcomingEventCard = ({ event, onLeaveEvent }) => {
 
     return (
         <NavLink to={`/events/${event._id}`} className="card-link">
-            <div className='card'>
-                <div className='card-info'>
+            <div className="card">
+                <div className="card-info">
                     <h3>{event.title}</h3>
-                    <h4>Host: {event.host.username}</h4>
+                    <p>Host: {event.host.username}</p>
                     <p>{formattedDate}</p>
                     <p>{event.location}</p>
                     <p>Players: {event.participants.length}/{event.maxParticipants}</p>
                 </div>
-                <div className='game-image'>
-                    {event.gameImage ? <img src={event.gameImage} alt={`${event.title} cover`} /> : 'No image available'}
+                <div className="card-image" style={{ backgroundImage: `url("${event.gameImage}")` }}></div>
+                <div className="card-button">
+                <button className="button-primary">
+                    View Event
+                </button>
                 </div>
             </div>
         </NavLink>

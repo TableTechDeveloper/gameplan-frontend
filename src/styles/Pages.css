@@ -1,3 +1,4 @@
+/* Pages and page specific styles */
 .page-section {
     display: flex;
     flex-direction: column;
@@ -17,8 +18,27 @@
 
 .eventpage-gameimage {
     height: 200px;
-    background-color: cornflowerblue;
+    background-size: cover; /* Cover the container */
+    background-position: top; /* Center the image */
+    background-repeat: no-repeat; /* Prevent tiling */
     overflow: hidden;
+}
+
+/* New Event radio buttons */
+.radio-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+
+.radio-buttons label {
+    font-size: 1rem;
+}
+
+.radio-button {
+    height: 50px;
+    width: 50px;
+    accent-color: var(--color-theme2);
 }
 
 
@@ -59,12 +79,6 @@
     }
 
 
-
-    .page-top button {
-        width: 400px;
-        height: 100px;
-        font-size: 2rem;
-    }    
    
     .upcoming-games {
         flex-basis: 60%;

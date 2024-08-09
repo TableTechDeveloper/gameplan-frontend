@@ -23,7 +23,7 @@ const DraftEventCard = () => {
                 </NavLink>
                 <button className="button-cancel" onClick={handleDiscardEvent}>Discard Event</button>
             </div>
-            <div className='game-image'>image</div>
+            <div className='card-image'>image</div>
         </div>
 
     );

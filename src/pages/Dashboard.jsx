@@ -25,7 +25,7 @@ const Dashboard = () => {
                     <UserIcon />
                 </div>
                 <div className="page-buttons">
-                    <NavLink id="dash-new-game-button">
+                    <NavLink to="/newevent">
                         <button className="button-primary">New Event</button>
                     </NavLink>
                 </div>
