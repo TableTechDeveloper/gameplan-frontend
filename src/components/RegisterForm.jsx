@@ -1,6 +1,8 @@
 // RegisterForm.js
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import axios from "../axios"; // axios instance is imported from axios.js
+import { ModalContext } from "../pages/_TemplatePage";
+import LoginForm from "./LoginForm";
 // import { API_BASE_URL } from "../config";
 
 const RegisterForm = () => {
@@ -13,6 +15,7 @@ const RegisterForm = () => {
   const [securityQuestionTwo, setSecurityQuestionTwo] = useState("");
   const [securityQuestionThree, setSecurityQuestionThree] = useState("");
   const [error, setError] = useState(null);
+  const { openModal } = useContext(ModalContext);
   // const API_BASE_URL = process.env.REACT_APP_SERVER_URL; *use top import instead
   // ${API_BASE_URL}
 
@@ -50,6 +53,7 @@ const RegisterForm = () => {
       const data = await response.data;
       const token = data.jwt;
 
+      openModal(<LoginForm />);
       // Store the token in localStorage
       localStorage.setItem("token", token);
       console.log(
