@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import axios from "../axios";
+import { ModalContext } from "../pages/_TemplatePage";
+import ResetPasswordModal from "../modals/ResetPasswordModal";
 
 const EditProfile = () => {
   const [userData, setUserData] = useState(null);
   const [error, setError] = useState(null);
+  const { openModal } = useContext(ModalContext);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -39,6 +42,10 @@ const EditProfile = () => {
 
     fetchUserData();
   }, []);
+
+  const handleChangePasswordClick = () => {
+    openModal(<ResetPasswordModal />);
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -126,6 +133,10 @@ const EditProfile = () => {
               defaultValue={userData?.bio}
             />
           </div>
+
+          <p className="small-link" onClick={handleChangePasswordClick}>
+            Change Password
+          </p>
 
           <button type="submit" className="button-primary">
             Save Changes
