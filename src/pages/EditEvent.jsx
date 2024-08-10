@@ -13,7 +13,7 @@ import FailModal from '../modals/FailModal';
 const EditEvent = () => {
     const { id } = useParams();
     const { games, loading: gamesLoading, error: gamesError } = useFetchGames();
-    const { event, loading: eventLoading, error: eventError, fetchEvent } = useFetchSingleEvent(id);
+    const { event, loading: eventLoading, error: eventError } = useFetchSingleEvent(id);
     const [selectedGame, setSelectedGame] = useState('');
     const [gameDetails, setGameDetails] = useState({ duration: '', minPlayers: '', maxPlayers: '', image: '', thumbnail: '' });
     const [eventDate, setEventDate] = useState(new Date());
@@ -66,7 +66,9 @@ const EditEvent = () => {
         }
     };
 
-    const handleSubmit = async (e) => {
+    // I know having this function here is not very dry. But every time I tried to split this off I broke everything. 
+    // So here we are.
+    const handleSubmitEditEvent = async (e) => {
         e.preventDefault();
         const eventData = {
             title,
@@ -114,7 +116,7 @@ const EditEvent = () => {
     return (
         <section className="NewEvent">
             <h1>Edit Event</h1>
-            <form id="new-event" onSubmit={handleSubmit}>
+            <form id="new-event" onSubmit={handleSubmitEditEvent}>
                 <div className="form-field">
                     <label htmlFor="title">Event Title:</label>
                     <input
@@ -126,21 +128,24 @@ const EditEvent = () => {
                         required
                     />
                 </div>
-                <h2>Select a game:</h2>
-                <input
-                    type="text"
-                    list="games"
-                    value={selectedGame}
-                    onChange={handleGameChange}
-                    placeholder="Search for a game"
-                />
-                <datalist id="games">
-                    {games.map(game => (
-                        <option key={game._id} value={game.name}>
-                            {game.name}
-                        </option>
-                    ))}
-                </datalist>
+                <div className="form-field">
+                <label htmlFor="games">Select a game:</label>
+                    <input
+                        type="text"
+                        list="games"
+                        value={selectedGame}
+                        onChange={handleGameChange}
+                        placeholder="Search for a game"
+                    />
+                    <datalist id="games">
+                        {games.map(game => (
+                            <option key={game._id} value={game.name}>
+                                {game.name}
+                            </option>
+                        ))}
+                    </datalist>
+                </div>
+                
                 <div className="form-field">
                     <label htmlFor="gameDuration">Game Duration:</label>
                     <input
@@ -193,27 +198,31 @@ const EditEvent = () => {
                 </div>
                 <div className="form-field">
                     <label>Visibility:</label>
-                    <div>
-                        <input
-                            type="radio"
-                            id="game-private"
-                            name="visibility"
-                            value="private"
-                            checked={!isPublic}
-                            onChange={() => setIsPublic(false)}
-                        />
-                        <label htmlFor="game-private">Private</label>
-                    </div>
-                    <div>
-                        <input
-                            type="radio"
-                            id="game-public"
-                            name="visibility"
-                            value="public"
-                            checked={isPublic}
-                            onChange={() => setIsPublic(true)}
-                        />
-                        <label htmlFor="game-public">Public</label>
+                    <div className="radio-buttons">
+                        <div>
+                            <input
+                                className="radio-button"
+                                type="radio"
+                                id="game-public"
+                                name="visibility"
+                                value="public"
+                                checked={isPublic}
+                                onChange={() => setIsPublic(true)}
+                            />
+                            <label htmlFor="game-public">Public</label>
+                        </div>
+                        <div>
+                            <input
+                                className="radio-button"
+                                type="radio"
+                                id="game-private"
+                                name="visibility"
+                                value="private"
+                                checked={!isPublic}
+                                onChange={() => setIsPublic(false)}
+                            />
+                            <label htmlFor="game-private">Private</label>
+                        </div>
                     </div>
                 </div>
                 <button type="submit" className="button-primary">Update Event</button>

@@ -1,17 +1,15 @@
 .nav-menu {
     width: 100%;
+    display: flex;
+    justify-content: flex-end;
     position: absolute;
     top: 60px;
     z-index: 1;
-    display: flex;
-    justify-content: space-between;
     background-color: #b4b4b4;
-    display: block;
     max-height: 0;
     overflow: hidden;
     opacity: 1.0;
     transition: all 0.3s ease-in-out;
-    /* border-radius: 15px; */
 }
 
 .nav-menu.open {
@@ -20,9 +18,9 @@
 }
 
 #nav-links {
-    padding: 0px 00px 0px 20px;
-    /* background-color: #959595; */
-    /* width: 200px; */
+    display: flex;
+    flex-direction: column; /* Stack links vertically by default */
+    padding: 10px 20px;
 }
 
 .nav-menu a {
@@ -30,31 +28,30 @@
     padding: 10px 0;
     text-decoration: none;
     font-weight: 700;
-    
+    text-align: right; /* Center text in the links */
 }
 
 .nav-menu a:hover {
     color: var(--link-hover);
-    /* text-shadow: 0px 0px 5px #ffffff; */
 }
 
 /* DESKTOP BREAK SIZE */
 @media only screen and (min-width: 1024px) {
-
     .nav-menu {
         top: 100px;
-        display: flex;
-        justify-content: flex-end;
+        justify-content: center; /* Center #nav-links horizontally */
+        align-items: center; /* Center #nav-links vertically */
+    }
+
+    #nav-links {
+        flex-direction: row; /* Display links horizontally on desktop */
+        justify-content: space-between;
+        width: 100%;
+        max-width: 1200px;
+        padding: 20px 40px;
     }
 
     .nav-menu a {
-        text-align: right;
+        text-align: center; /* Keep text centered in the links */
     }
-    
-    #nav-links {
-        padding: 0px 20px 0px 0px;
-    }
-
-    
-
 }
