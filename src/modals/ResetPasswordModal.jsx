@@ -39,7 +39,15 @@ const ResetPasswordModal = () => {
       setError(null);
 
       closeModal();
-      // Potentially display a success message or redirect to the login page
+
+      const updatedUserData = {
+        email,
+        password: newPassword,
+      };
+      console.log(
+        "Password reset successful! Updated user data (simulated):",
+        updatedUserData
+      );
     } catch (error) {
       console.error("Error resetting password:", error);
       setError(error.response?.data?.message || "An error occurred.");
