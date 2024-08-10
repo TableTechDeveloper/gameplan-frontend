@@ -1,17 +1,33 @@
 // HomePage.jsx
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import RegisterModal from "../modals/RegisterModal";
+import LoginModal from "../modals/LoginModal";
 import { ModalContext } from "../pages/_TemplatePage";
 import graphic from "../assets/graphic.svg";
 import { NavLink } from "react-router-dom";
 
 const HomePage = () => {
   const { openModal } = useContext(ModalContext);
+  const location = useLocation();
 
   const handleRegisterClick = () => {
     console.log("Register button clicked");
     openModal(<RegisterModal />);
   };
+
+  useEffect(() => {
+    if (location.state && location.state.showLoginModal) {
+      openModal(<LoginModal />);
+    }
+  }, [location.state]);
+
+  // This version fixes the ESLint but causes infinite loop on browser app
+  // useEffect(() => {
+  //   if (location.state && location.state.showLoginModal) {
+  //     openModal(<LoginModal />);
+  //   }
+  // }, [location.state, openModal]);
 
   return (
     <section className="HomePage">

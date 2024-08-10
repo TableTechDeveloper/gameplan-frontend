@@ -10,6 +10,7 @@ import HomePage from "./pages/HomePage.jsx";
 import MyDrafts from "./pages/MyDrafts.jsx";
 import MyEvents from "./pages/MyEvents.jsx";
 import NewEvent from "./pages/NewEvent.jsx";
+import ProtectedRoute from "./components/ProtectedRoute.jsx";
 // import axios from "axios";
 
 // axios.defaults.baseURL = process.env.REACT_APP_SERVER_URL; // Set base URL globally
@@ -28,15 +29,17 @@ const App = () => {
     <Routes>
       <Route path="/" element={<Template />}>
         <Route index element={<HomePage />} />
-        <Route path="dashboard" element={<Dashboard />} />
-        <Route path="discoverevents" element={<DiscoverEvents />} />
-        <Route path="discovergames" element={<DiscoverGames />} />
-        <Route path="editprofile" element={<EditProfile />} />
-        <Route path="eventpage" element={<EventPage />} />
-        <Route path="gamesowned" element={<GamesOwned />} />
-        <Route path="mydrafts" element={<MyDrafts />} />
-        <Route path="myevents" element={<MyEvents />} />
-        <Route path="newevent" element={<NewEvent />} />
+        <Route element={<ProtectedRoute />}>
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="discoverevents" element={<DiscoverEvents />} />
+          <Route path="discovergames" element={<DiscoverGames />} />
+          <Route path="editprofile" element={<EditProfile />} />
+          <Route path="eventpage" element={<EventPage />} />
+          <Route path="gamesowned" element={<GamesOwned />} />
+          <Route path="mydrafts" element={<MyDrafts />} />
+          <Route path="myevents" element={<MyEvents />} />
+          <Route path="newevent" element={<NewEvent />} />
+        </Route>
       </Route>
     </Routes>
   );
