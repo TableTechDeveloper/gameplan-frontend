@@ -9,8 +9,10 @@ const Header = ({ isOpen, toggleMenu, setIsMenuOpen }) => {
   
   return (
     <header className="header">
-      <Logo closeMenu={closeMenu} />
-      <Hamburger isOpen={isOpen} onClick={toggleMenu} />
+      <div className="header-content">
+        <Logo closeMenu={closeMenu} />
+        <Hamburger isOpen={isOpen} onClick={toggleMenu} />
+      </div>
     </header>
   );
 };

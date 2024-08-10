@@ -2,6 +2,8 @@
 import axios from 'axios';
 import { API_BASE_URL, getToken } from '../config';
 
+
+
 export const handleSubmitEvent = async (eventData, navigate) => {
     try {
         const token = getToken();
@@ -25,3 +27,5 @@ export const handleSubmitEvent = async (eventData, navigate) => {
         }
     }
 };
+
+
