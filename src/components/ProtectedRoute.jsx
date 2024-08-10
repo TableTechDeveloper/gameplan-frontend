@@ -5,7 +5,8 @@ const ProtectedRoute = () => {
   const token = localStorage.getItem("token");
   const location = useLocation();
 
-  // If not logged in, redirect to homepage page and show login modal ** login popup causing infinite loop
+  // If not logged in, redirect to homepage page
+  // Impliment login popup modal here later
   if (token) {
     console.log("User is authenticated. Access granted to protected route.");
     return <Outlet />;
@@ -13,13 +14,7 @@ const ProtectedRoute = () => {
     console.log(
       "User is not authenticated. Redirecting to homepage with login modal."
     );
-    return (
-      <Navigate
-        to="/"
-        state={{ from: location, showLoginModal: true }}
-        replace
-      />
-    );
+    return <Navigate to="/" state={{ from: location }} replace />;
   }
 };
 
