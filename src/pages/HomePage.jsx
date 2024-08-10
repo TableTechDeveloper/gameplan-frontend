@@ -1,6 +1,8 @@
 // HomePage.jsx
-import React, { useContext } from "react";
-import SignUpModal from "../modals/SignUpModal";
+import React, { useContext, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import RegisterModal from "../modals/RegisterModal";
+import LoginModal from "../modals/LoginModal";
 import { ModalContext } from "../pages/_TemplatePage";
 
 import bluepiece from "../assets/bluepiece.svg";
@@ -9,11 +11,25 @@ import dice from "../assets/dice.svg";
 
 const HomePage = () => {
   const { openModal } = useContext(ModalContext);
+  const location = useLocation();
 
-  const handleSignUpClick = () => {
+  const handleRegisterClick = () => {
     console.log("SignUp button clicked");
-    openModal(<RegisterpModal />);
+    openModal(<RegisterModal />);
   };
+
+  useEffect(() => {
+    if (location.state && location.state.showLoginModal) {
+      openModal(<LoginModal />);
+    }
+  }, [location.state]);
+
+  // This version fixes the ESLint but causes infinite loop on browser app
+  // useEffect(() => {
+  //   if (location.state && location.state.showLoginModal) {
+  //     openModal(<LoginModal />);
+  //   }
+  // }, [location.state, openModal]);
 
   return (
     <section className="home-page">
