@@ -2,6 +2,13 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { API_BASE_URL } from '../config';
 
+
+
+/**
+ * Custom hook to fetch public events data from the server.
+ * 
+ * @returns {Object} - An object containing the events data, loading state, and error state.
+ */
 const useFetchPublicEvents = () => {
     const [events, setEvents] = useState([]);
     const [loading, setLoading] = useState(true);
