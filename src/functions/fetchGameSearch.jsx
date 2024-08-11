@@ -17,7 +17,8 @@ const fetchGameSearch = async (query, API_BASE_URL, token, setGameData, setError
         const response = await axios.get(`${API_BASE_URL}/games/search?query=${query}&strict=true`, {
             headers: {
                 'Authorization': `Bearer ${token}`
-            }
+            },
+            timeout: 3000
         });
         console.log("SERVER RESPONSE: ", response)
 
