@@ -50,10 +50,10 @@ const DiscoverGames = () => {
         <div className="game-search-results">
           {loading ? (
             <p>Loading...</p> // Display this while loading
-          ) : gameData ? (
+          ) : gameData && gameData.length > 0 ? (
             <GameSearchCard game={gameData} />
           ) : (
-            <p>No games found</p>
+            <p>No games found</p> // Display this if no games are found
           )}
         </div>
       </div>
