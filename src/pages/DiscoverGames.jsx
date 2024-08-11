@@ -11,7 +11,7 @@ const DiscoverGames = () => {
   const API_BASE_URL = process.env.REACT_APP_SERVER_URL;
 
   // Fetch the JWT token from localStorage
-  const token = localStorage.getItem("authToken");
+  const token = localStorage.getItem("token");
 
   const handleSearch = (event) => {
     event.preventDefault();

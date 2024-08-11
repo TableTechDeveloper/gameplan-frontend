@@ -17,7 +17,7 @@ const GameSearchCard = ({ game }) => {
       <div
         className="card-image"
         id="game-search-image"
-        style={{ backgroundImage: `url("${game.thumbnail || game.image}")` }}
+        style={{ backgroundImage: `url("${game.image || game.thumbnail}")` }}
       ></div>
       <div id="game-search-add-button-div">
         <button

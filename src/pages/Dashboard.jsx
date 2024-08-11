@@ -9,6 +9,8 @@ const Dashboard = () => {
   const [userData, setUserData] = useState(null);
   const [error, setError] = useState(null);
 
+  console.log("User Data:", userData);
+
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -63,8 +65,6 @@ const Dashboard = () => {
         <div>
           <h1>Dashboard:</h1>
           <UserIcon />
-          <h2>Welcome {userData ? userData.username : "Guest"}</h2>
-          <p>Your upcoming games:</p>
         </div>
         <div className="page-buttons">
           <NavLink to="/newevent">

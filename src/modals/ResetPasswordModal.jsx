@@ -84,7 +84,7 @@ const ResetPasswordModal = () => {
           />
         </div>
         <div className="form-field">
-          <label htmlFor="securityQuestionTwo">Security Question 1:</label>
+          <label htmlFor="securityQuestionTwo">Security Question 2:</label>
           <input
             type="text"
             id="securityQuestionTwo"
