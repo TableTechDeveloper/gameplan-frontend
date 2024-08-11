@@ -57,6 +57,8 @@ export const handleAddGame = async (gameId, openModal) => {
             }
         });
 
+        await new Promise(resolve => setTimeout(resolve, 3000));
+
         if (response.status === 200) {
             openModal(<SuccessModal message="Game added to your collection!" />);
         }
