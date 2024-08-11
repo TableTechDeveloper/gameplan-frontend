@@ -1,12 +1,19 @@
 import React, { useEffect, useState, useContext } from "react";
 import axios from "../axios";
+import { useNavigate } from "react-router-dom";
 import { ModalContext } from "../pages/_TemplatePage";
 import ResetPasswordModal from "../modals/ResetPasswordModal";
+import ConfirmModal from "../modals/ConfirmModal";
+import SuccessModal from "../modals/SuccessModal";
+import FailModal from "../modals/FailModal";
+import UserIcon from "../components/UserIcon";
 
 const EditProfile = () => {
   const [userData, setUserData] = useState(null);
   const [error, setError] = useState(null);
-  const { openModal } = useContext(ModalContext);
+  const [isLoading, setIsLoading] = useState(true);
+  const navigate = useNavigate();
+  const { openModal, closeModal } = useContext(ModalContext);
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -27,16 +34,9 @@ const EditProfile = () => {
         console.log("Fetched user data:", response.data);
       } catch (error) {
         console.error("Error fetching user data:", error);
-        // Handle error (display error message)
-        if (
-          error.response &&
-          error.response.data &&
-          error.response.data.message
-        ) {
-          setError(error.response.data.message);
-        } else {
-          setError("An error occurred while fetching user data.");
-        }
+        setError(error.response?.data?.message || "An error occurred.");
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -69,18 +69,18 @@ const EditProfile = () => {
         "Changes patched successfully! Updated user data:",
         updatedUserData
       );
+
+      openModal(<SuccessModal message="Profile updated successfully!" />);
+      setTimeout(() => {
+        closeModal();
+      }, 2000); // Close modal after 2 seconds
     } catch (error) {
-      console.error("Error updating user data:", error);
-      // Handle error (display error message)
-      if (
-        error.response &&
-        error.response.data &&
-        error.response.data.message
-      ) {
-        setError(error.response.data.message);
-      } else {
-        setError("An error occurred while updating user data.");
-      }
+      console.error("Error updating profile:", error);
+      openModal(
+        <FailModal
+          message={error.response?.data?.message || "An error occurred."}
+        />
+      );
     }
   };
 
@@ -89,62 +89,108 @@ const EditProfile = () => {
     console.log("Changes discarded.");
   };
 
+  const handleDeleteProfile = async () => {
+    openModal(
+      <ConfirmModal
+        message="Are you sure you want to delete your profile permanently? This action cannot be undone."
+        onConfirm={async () => {
+          try {
+            const token = localStorage.getItem("token");
+            await axios.delete("/user", {
+              headers: { Authorization: `Bearer ${token}` },
+            });
+
+            localStorage.removeItem("token");
+            setUserData(null);
+            navigate("/");
+
+            closeModal();
+            openModal(<SuccessModal message="Profile deleted successfully!" />);
+            setTimeout(() => {
+              closeModal();
+            }, 2000);
+          } catch (error) {
+            console.error("Error deleting profile:", error);
+            closeModal();
+            openModal(
+              <FailModal
+                message={error.response?.data?.message || "An error occurred."}
+              />
+            );
+          }
+        }}
+        onCancel={closeModal}
+      />
+    );
+  };
+
   return (
     <section className="EditProfile">
-      <h2>Profile Photo</h2>
-      <div className="profile-photo"></div>
+      <h1>Edit Profile:</h1>
+      <UserIcon />
+      {/*<h2>Welcome {userData ? userData.username : "Guest"}</h2>*/}
 
       {error && <div className="error-message">{error}</div>}
-      {userData && (
-        <form
-          id="edit-profile"
-          onSubmit={handleSubmit}
-          onReset={handleDiscardChanges}
-          method="post"
-        >
-          <div className="form-field">
-            <label htmlFor="username">Username:</label>
-            <input
-              type="text"
-              id="username"
-              name="username"
-              defaultValue={userData?.username}
-              required
-            />
+      {isLoading ? (
+        <p>Loading user data...</p>
+      ) : (
+        userData && (
+          <div>
+            <form
+              id="edit-profile"
+              onSubmit={handleSubmit}
+              onReset={handleDiscardChanges}
+              method="post"
+            >
+              <div className="form-field">
+                <label htmlFor="username">Username:</label>
+                <input
+                  type="text"
+                  id="username"
+                  name="username"
+                  defaultValue={userData?.username}
+                  required
+                />
+              </div>
+
+              <div className="form-field">
+                <label htmlFor="location">Location:</label>
+                <input
+                  type="text"
+                  id="location"
+                  name="location"
+                  defaultValue={userData?.location}
+                  required
+                />
+              </div>
+
+              <div className="form-field">
+                <label htmlFor="bio">Bio:</label>
+                <input
+                  type="text"
+                  id="bio"
+                  name="bio"
+                  defaultValue={userData?.bio}
+                />
+              </div>
+
+              <p className="small-link" onClick={handleChangePasswordClick}>
+                Change Password
+              </p>
+
+              <button type="submit" className="button-primary">
+                Save Changes
+              </button>
+              <button type="reset" className="button-cancel">
+                Discard Changes
+              </button>
+            </form>
+
+            <button onClick={handleDeleteProfile} className="button-delete">
+              Delete Profile
+            </button>
           </div>
-
-          <div className="form-field">
-            <label htmlFor="location">Location:</label>
-            <input
-              type="text"
-              id="location"
-              name="location"
-              defaultValue={userData?.location}
-              required
-            />
-          </div>
-
-          <div className="form-field">
-            <label htmlFor="bio">Bio:</label>
-            <input
-              type="text"
-              id="bio"
-              name="bio"
-              defaultValue={userData?.bio}
-            />
-          </div>
-
-          <p className="small-link" onClick={handleChangePasswordClick}>
-            Change Password
-          </p>
-
-          <button type="submit" className="button-primary">
-            Save Changes
-          </button>
-          <button type="reset" className="button-cancel">
-            Discard Changes
-          </button>
-        </form>
+        )
       )}
     </section>
   );
