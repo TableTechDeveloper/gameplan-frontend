@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import axios from "../axios";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { ModalContext } from "../pages/_TemplatePage";
 import ResetPasswordModal from "../modals/ResetPasswordModal";
@@ -7,6 +7,7 @@ import ConfirmModal from "../modals/ConfirmModal";
 import SuccessModal from "../modals/SuccessModal";
 import FailModal from "../modals/FailModal";
 import UserIcon from "../components/UserIcon";
+import { API_BASE_URL, getToken } from '../config';
 
 const EditProfile = () => {
   const [userData, setUserData] = useState(null);
@@ -18,18 +19,20 @@ const EditProfile = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const token = localStorage.getItem("token");
+        console.log('Starting fetchUserData...');
+        const token = getToken();
         if (!token) {
-          // Handle case where user is not logged in (redirect to login page)
+          console.log('No token found.');
           return;
         }
-
-        const response = await axios.get(`/user`, {
+  
+        console.log('Token found:', token);
+        const response = await axios.get(`${API_BASE_URL}/user`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
-
+  
         setUserData(response.data);
         console.log("Fetched user data:", response.data);
       } catch (error) {
@@ -39,9 +42,10 @@ const EditProfile = () => {
         setIsLoading(false);
       }
     };
-
+  
     fetchUserData();
   }, []);
+  
 
   const handleChangePasswordClick = () => {
     openModal(<ResetPasswordModal />);
@@ -57,8 +61,8 @@ const EditProfile = () => {
     };
 
     try {
-      const token = localStorage.getItem("token");
-      await axios.patch(`/user/update`, updatedUserData, {
+      const token = getToken();
+      await axios.patch(`${API_BASE_URL}/user/update`, updatedUserData, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -95,8 +99,8 @@ const EditProfile = () => {
         message="Are you sure you want to delete your profile permanently? This action cannot be undone."
         onConfirm={async () => {
           try {
-            const token = localStorage.getItem("token");
-            await axios.delete("/user", {
+            const token = getToken();
+            await axios.delete(`${API_BASE_URL}/user`, {
               headers: { Authorization: `Bearer ${token}` },
             });
 
@@ -180,12 +184,12 @@ const EditProfile = () => {
               <button type="submit" className="button-primary">
                 Save Changes
               </button>
-              <button type="reset" className="button-cancel">
+              <button type="reset" className="button-secondary">
                 Discard Changes
               </button>
             </form>
 
-            <button onClick={handleDeleteProfile} className="button-delete">
+            <button onClick={handleDeleteProfile} className="button-cancel">
               Delete Profile
             </button>
           </div>
