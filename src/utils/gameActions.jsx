@@ -44,20 +44,18 @@ export const handleConfirmClick = (name, gameId, onRemoveGame, openModal, closeM
 
 export const handleAddGame = async (gameId, openModal) => {
     try {
-        const token = localStorage.getItem('token'); // Retrieve the token from local storage
+        const token = getToken(); // Retrieve the token using getToken
         if (!token) {
             openModal(<FailModal message="You are not authenticated!" />);
             return;
         }
 
-        const response = await axios.post('http://localhost:3000/games/add', { gameId }, {
+        const response = await axios.post(`${API_BASE_URL}/games/add`, { gameId }, {
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json'
             }
         });
-
-        await new Promise(resolve => setTimeout(resolve, 3000));
 
         if (response.status === 200) {
             openModal(<SuccessModal message="Game added to your collection!" />);
