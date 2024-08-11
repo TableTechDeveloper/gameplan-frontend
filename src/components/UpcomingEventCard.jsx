@@ -12,7 +12,7 @@ const UpcomingEventCard = ({ event, onLeaveEvent }) => {
         return <div>Username is missing</div>; // or handle this case in a more user-friendly way
     }
 
-    console.log("Username: ", event.host.username);
+    // console.log("Username: ", event.host.username);
     
 
     return (

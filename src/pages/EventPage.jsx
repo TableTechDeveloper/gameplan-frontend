@@ -5,6 +5,7 @@ import useFetchUser from '../functions/useFetchUser';
 import CancelEventButton from '../components/CancelEventButton';
 import JoinEventButton from '../components/JoinEventButton';
 import LeaveEventButton from '../components/LeaveEventButton';
+import UserIcon from '../components/UserIcon';
 import { formatDateTime } from '../utils/dateUtils';
 import "../styles/EventPage.css";
 
@@ -17,11 +18,18 @@ const EventPage = () => {
     if (eventError || userError) return <p>{eventError || userError}</p>;
     if (!event) return <p>Event not found.</p>;
 
-    const isHost = user && event.host && user._id === event.host._id;
+    const isHost = user && event.host && user.id === event.host._id;
+    console.log("Is the host?", isHost);
+    console.log("Users ID:", user._id);
+    console.log("Hosts ID:", event.host._id);
     const formattedDate = formatDateTime(event.eventDate);
 
     return (
         <section className="EventPage">
+            <div>
+                {/* <h1>Event Page:</h1> */}
+                <UserIcon />
+            </div>
             <div className="event-header">
                 <div className="event-details">
                     <h1>{event.title}</h1>

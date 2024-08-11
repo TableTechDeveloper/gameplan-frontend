@@ -12,12 +12,12 @@ const UserIcon = () => {
         return <h2>Error: {userError}</h2>;
     }
 
-    // const initial = user ? user.username.charAt(0).toUpperCase() : 'G';
-
-
     return (
-        // <h2>Welcome {initial}</h2>
-        <h2>Welcome {user ? user.username : 'Guest'}</h2>
+        <div>
+            <h2>Welcome {user ? user.username : 'Guest'}</h2>
+            {/* <p>User ID: {user.id}</p> */}
+            {/* when fetching the user user.id not user._id for some reason */}
+        </div>
     );
 };
 

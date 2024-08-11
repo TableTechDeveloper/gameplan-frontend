@@ -11,12 +11,18 @@ const useFetchUser = () => {
         const fetchUser = async () => {
             try {
                 const token = getToken();
+                console.log("Fetching user with token:", token);
                 const response = await axios.get(`${API_BASE_URL}/user`, {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
                 });
-                setUser(response.data.user);
+
+                console.log("API response:", response);
+                console.log("User data:", response.data); // Log the entire data object
+
+                // Set the user data directly since it's in response.data, not response.data.user
+                setUser(response.data);
             } catch (error) {
                 setError("Failed to load user.");
                 console.error("Failed to load user:", error);
@@ -32,4 +38,3 @@ const useFetchUser = () => {
 };
 
 export default useFetchUser;
-
