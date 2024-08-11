@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import "../styles/NavMenu.css";
-import Logout from "./Logout";
+import Logout from "../functions/Logout";
 
 const NavMenu = ({ isOpen, toggleMenu }) => {
   return (

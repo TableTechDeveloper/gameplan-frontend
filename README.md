@@ -1,70 +1,180 @@
-# Getting Started with Create React App
+# Frontend Project README
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Project Overview
 
-## Available Scripts
+This project is the frontend of a web application designed to allow users to create, join, and leave events. The frontend is built using React and interacts with a backend API to manage user authentication, event participation, and other related functionalities.
 
-In the project directory, you can run:
+## Table of Contents
 
-### `npm start`
+- [Project Overview](#project-overview)
+- [Features](#features)
+- [Setup and Installation](#setup-and-installation)
+- [Project Structure](#project-structure)
+- [Key Components and Hooks](#key-components-and-hooks)
+  - [JoinEventButton](#joineventbutton)
+  - [LeaveEventButton](#leaveeventbutton)
+  - [EventPage](#eventpage)
+  - [useFetchSingleEvent](#usefetchsingleevent)
+- [Running the Project](#running-the-project)
+- [Contributing](#contributing)
+- [License](#license)
 
-Runs the app in the development mode.\
-Open [${process.env.REACT_APP_SERVER_URL}/user/collection/${gameId}](${process.env.REACT_APP_SERVER_URL}/user/collection/${gameId}) to view it in your browser.
+## Features
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Event Management**: Users can view event details, join events, and leave events.
+- **Authentication**: Secure user authentication with token-based access.
+- **Responsive Design**: The application is designed to work on various screen sizes.
+- **Dynamic Data Fetching**: The application dynamically fetches and updates event data using custom hooks.
 
-### `npm test`
+## Setup and Installation
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Prerequisites
 
-### `npm run build`
+- Node.js (version 14.x or higher)
+- npm or yarn
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Installation
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. **Clone the repository**:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+git clone https://github.com/yourusername/your-repo-name.git
+cd your-repo-name
+```
 
-### `npm run eject`
+2. **Install dependencies:**
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```bash
+npm install
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+3. **Set up environment variables:**
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Create a .env file in the root directory and add the following:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+```bash
+REACT_APP_API_BASE_URL=http://your-api-url
+```
 
-## Learn More
+4. **Start the development server:**
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+npm start
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Project Structure
 
-### Code Splitting
+```bash
+src/
+│
+├── assets/
+│   ├── bluepiece.svg
+│   ├── redpiece.svg
+│   └── dice.svg
+│
+│
+├── components/
+│   ├── CancelEventButton.jsx
+│   ├── DraftEventCard.jsx
+│   ├── Footer.jsx
+│   ├── GameOwnedCard.jsx
+│   ├── GameSearchCard.jsx
+│   ├── Hamburger.jsx
+│   ├── Header.jsx
+│   ├── HomeHeader.jsx
+│   ├── JoinEventButton.jsx
+│   ├── LeaveEventButton.jsx
+│   ├── Logo.jsx
+│   ├── NavMenu.jsx
+│   ├── ProtectedRoute.jsx
+│   ├── TransitionWrapper.jsx
+│   ├── UpcomingEventCard.jsx
+│   └── UserIcon.jsx
+│
+├── context/
+│   └── UserContext.jsx
+│
+├── compofunctions/
+│   ├── eventActions.jsx
+│   ├── fetchGameSearch.jsx
+│   ├── Logout.jsx
+│   ├── useFetchEvents.jsx
+│   ├── useFetchGames.jsx
+│   ├── useFetchPublicEvents.jsx
+│   ├── useFetchSingleEvent.jsx
+│   ├── useFetchUser.jsx
+│   └── useGameDetails.jsx
+│
+├── modals/
+│   ├── ConfirmModal.jsx
+│   ├── FailModal.jsx
+│   ├── LoginModal.jsx
+│   ├── Modal.jsx
+│   ├── RegisterModal.jsx
+│   ├── ResetPasswordModal.jsx
+│   └── SuccessModal.jsx
+│
+├── pages/
+│   ├── _TemplatePage_.jsx
+│   ├── DiscoverEvents.jsx
+│   ├── DiscoverGames.jsx
+│   ├── EditEvent.jsx
+│   ├── EventPage.jsx
+│   ├── GamesOwned.jsx
+│   ├── HomePage.jsx
+│   ├── MyEvents.jsx
+│   └── NewEvent.jsx
+│
+├── styles/
+│   ├── Buttons.css
+│   ├── Card.css
+│   ├── EventPage.css
+│   ├── Footer.css
+│   ├── Form.css
+│   ├── Graphic.css
+│   ├── Hamburger.css
+│   ├── Header.css
+│   ├── index.css
+│   ├── Modal.css
+│   ├── NavMenu.css
+│   ├── Pages.css
+│   ├── TransitionWrapper.css
+│   └── variables.css
+│
+├── styles/
+│   ├── dateUtils.css
+│   └── gameActions.css
+│
+├── App.js
+└── index.js
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Key Components and Hooks
 
-### Analyzing the Bundle Size
+### JoinEventButton
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- Location: src/components/JoinEventButton.jsx
+- Description: A button that allows users to join an event. It triggers an API call to register the user for the event and updates the event details using the refreshEvent callback.
 
-### Making a Progressive Web App
+### LeaveEventButton
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- Location: src/components/LeaveEventButton.jsx
+- Description: A button that allows users to leave an event. It triggers an API call to remove the user from the event's participant list and refreshes the event details using the refreshEvent callback.
 
-### Advanced Configuration
+### EventPage
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- Location: src/pages/EventPage.jsx
+- Description: The main page for displaying detailed information about a specific event. It uses the useFetchSingleEvent hook to fetch and display event details. It also includes buttons for joining or leaving the event.
 
-### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### useFetchSingleEvent
 
-### `npm run build` fails to minify
+- Location: src/hooks/useFetchSingleEvent.jsx
+- Description: A custom hook for fetching details of a single event. It returns the event data, loading state, error state, and a fetchEvent function for re-fetching the event data.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Running the Project
+
+To run the project locally, use the following commands:
+```bash
+npm start
+```

@@ -44,7 +44,7 @@ export const handleConfirmClick = (name, gameId, onRemoveGame, openModal, closeM
 
 export const handleAddGame = async (gameId, openModal) => {
     try {
-        const token = localStorage.getItem('authToken'); // Retrieve the token from local storage
+        const token = localStorage.getItem('token'); // Retrieve the token from local storage
         if (!token) {
             openModal(<FailModal message="You are not authenticated!" />);
             return;

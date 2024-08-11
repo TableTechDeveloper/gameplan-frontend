@@ -91,7 +91,7 @@ const RegisterModal = () => {
       </p>
 
       <form onSubmit={handleSubmit}>
-        <div>
+        <div className="form-field">
           <label>Username:</label>
           <input
             type="text"
@@ -100,7 +100,7 @@ const RegisterModal = () => {
             required
           />
         </div>
-        <div>
+        <div className="form-field">
           <label>Email:</label>
           <input
             type="email"
@@ -109,7 +109,7 @@ const RegisterModal = () => {
             required
           />
         </div>
-        <div>
+        <div className="form-field">
           <label>Password:</label>
           <input
             type="password"
@@ -118,7 +118,7 @@ const RegisterModal = () => {
             required
           />
         </div>
-        <div>
+        <div className="form-field">
           <label>Confirm Password:</label>
           <input
             type="password"
@@ -127,7 +127,7 @@ const RegisterModal = () => {
             required
           />
         </div>
-        <div>
+        <div className="form-field">
           <label>Location:</label>
           <input
             type="text"
@@ -135,7 +135,7 @@ const RegisterModal = () => {
             onChange={(e) => setLocation(e.target.value)}
           />
         </div>
-        <div>
+        <div className="form-field">
           <label>Security Question 1:</label>
           <input
             type="text"
@@ -143,7 +143,7 @@ const RegisterModal = () => {
             onChange={(e) => setSecurityQuestionOne(e.target.value)}
           />
         </div>
-        <div>
+        <div className="form-field">
           <label>Security Question 2:</label>
           <input
             type="text"
@@ -151,7 +151,7 @@ const RegisterModal = () => {
             onChange={(e) => setSecurityQuestionTwo(e.target.value)}
           />
         </div>
-        <div>
+        <div className="form-field">
           <label>Security Question 3:</label>
           <input
             type="text"
@@ -161,7 +161,7 @@ const RegisterModal = () => {
         </div>
         {error && <div className="error-message">{error}</div>}{" "}
         {/* Display error message if there is an error */}
-        <button type="submit">Register</button>
+        <button className="button-primary" type="submit">Register</button>
       </form>
     </div>
   );

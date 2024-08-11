@@ -128,7 +128,6 @@ const EditProfile = () => {
     <section className="EditProfile">
       <h1>Edit Profile:</h1>
       <UserIcon />
-      {/*<h2>Welcome {userData ? userData.username : "Guest"}</h2>*/}
 
       {error && <div className="error-message">{error}</div>}
       {isLoading ? (

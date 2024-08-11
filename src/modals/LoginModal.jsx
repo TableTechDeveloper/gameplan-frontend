@@ -71,7 +71,7 @@ const LoginModal = () => {
       </p>
 
       <form onSubmit={handleSubmit}>
-        <div>
+        <div className="form-field">
           <label>Username:</label>
           <input
             type="username"
@@ -80,7 +80,7 @@ const LoginModal = () => {
             required
           />
         </div>
-        <div>
+        <div className="form-field">
           <label>Password:</label>
           <input
             type="password"
@@ -90,7 +90,7 @@ const LoginModal = () => {
           />
         </div>
         {error && <div className="error-message">{error}</div>}
-        <button type="submit">Login</button>
+        <button className="button-primary" type="submit">Login</button>
       </form>
 
       <p className="small-link" onClick={handleForgotPasswordClick}>
