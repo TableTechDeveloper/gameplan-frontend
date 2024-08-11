@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import useFetchEvents from "../functions/useFetchEvents";
 import UpcomingEventCard from "../components/UpcomingEventCard";
 import UserIcon from "../components/UserIcon";
@@ -63,7 +63,7 @@ const Dashboard = () => {
         <div>
           <h1>Dashboard:</h1>
           <UserIcon />
-          <h2>Welcome {user ? user.username : "Guest"}</h2>
+          <h2>Welcome {userData ? userData.username : "Guest"}</h2>
           <p>Your upcoming games:</p>
         </div>
         <div className="page-buttons">

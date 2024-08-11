@@ -10,6 +10,7 @@ import HomePage from "./pages/HomePage.jsx";
 import MyDrafts from "./pages/MyDrafts.jsx";
 import MyEvents from "./pages/MyEvents.jsx";
 import NewEvent from "./pages/NewEvent.jsx";
+import EditEvent from "./pages/EditEvent.jsx";
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 // import axios from "axios";
 
