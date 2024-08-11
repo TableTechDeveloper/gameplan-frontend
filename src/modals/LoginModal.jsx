@@ -1,9 +1,10 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "../axios";
+import axios from "axios";
 import { ModalContext } from "../pages/_TemplatePage";
 import RegisterModal from "../modals/RegisterModal";
 import ResetPasswordModal from "./ResetPasswordModal";
+import { API_BASE_URL } from '../config';
 
 const LoginModal = () => {
   const { closeModal, openModal } = useContext(ModalContext);
@@ -11,19 +12,18 @@ const LoginModal = () => {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
   const [error, setError] = useState(null);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await axios.post(`/user/login`, {
+      const response = await axios.post(`${API_BASE_URL}/user/login`, {
         username,
         password,
       });
       console.log("Login successful:", response.data);
 
-      const data = await response.data;
+      const data = response.data;
       const token = data.jwt;
 
       localStorage.setItem("token", token);
@@ -49,6 +49,7 @@ const LoginModal = () => {
       }
     }
   };
+
   const handleRegisterClick = (event) => {
     event.preventDefault();
     closeModal();
@@ -74,7 +75,7 @@ const LoginModal = () => {
         <div className="form-field">
           <label>Username:</label>
           <input
-            type="username"
+            type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
