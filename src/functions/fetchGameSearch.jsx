@@ -19,7 +19,7 @@ const fetchGameSearch = async (query, API_BASE_URL, token, setGameData, setError
                 'Authorization': `Bearer ${token}`
             }
         });
-        console.log(response)
+        console.log("SERVER RESPONSE: ", response)
 
         // Update the state with the retrieved game data.
         // In strict mode, this should be a single game object.
