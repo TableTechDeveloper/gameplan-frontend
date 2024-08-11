@@ -15,6 +15,7 @@ const DiscoverEvents = () => {
         return <div>{eventsError}</div>;
     }
 
+
     return (
         <section className="page-section">
             <div className="page-top">

@@ -6,6 +6,15 @@ import "../styles/Card.css";
 const UpcomingEventCard = ({ event, onLeaveEvent }) => {
     const formattedDate = formatDateTime(event.eventDate);
 
+    const username = event?.host?.username;
+
+    if (!username) {
+        return <div>Username is missing</div>; // or handle this case in a more user-friendly way
+    }
+
+    console.log("Username: ", event.host.username);
+    
+
     return (
         <NavLink to={`/events/${event._id}`} className="card-link">
             <div className="card">
