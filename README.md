@@ -16,8 +16,6 @@ This project is the frontend of a web application designed to allow users to cre
   - [EventPage](#eventpage)
   - [useFetchSingleEvent](#usefetchsingleevent)
 - [Running the Project](#running-the-project)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Features
 
@@ -173,6 +171,21 @@ src/
 - Description: A custom hook for fetching details of a single event. It returns the event data, loading state, error state, and a fetchEvent function for re-fetching the event data.
 
 ### Running the Project
+
+#### Configure first
+
+To make the project talk to the locally run backend server modify the **config.js** file first.
+
+Replace
+```javascript
+export const API_BASE_URL = "https://gameplan-backend-7j9b.onrender.com";
+```
+with
+```javascript
+export const API_BASE_URL = process.env.REACT_APP_SERVER_URL;
+```
+
+#### Run the project
 
 To run the project locally, use the following commands:
 ```bash
