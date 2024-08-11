@@ -13,6 +13,7 @@ const fetchGameSearch = async (query, API_BASE_URL, token, setGameData, setError
     try {
         // Send a GET request to the API to search for a game based on the query.
         // The request includes the authorization token in the headers.
+        console.log("Game searched for is: ", query)
         const response = await axios.get(`${API_BASE_URL}/games/search?query=${query}&strict=true`, {
             headers: {
                 'Authorization': `Bearer ${token}`
