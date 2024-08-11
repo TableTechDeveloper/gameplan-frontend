@@ -7,15 +7,18 @@ const DiscoverGames = () => {
   const [query, setQuery] = useState("");
   const [gameData, setGameData] = useState(null);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false); // New loading state
 
   const API_BASE_URL = process.env.REACT_APP_SERVER_URL;
 
   // Fetch the JWT token from localStorage
   const token = localStorage.getItem("token");
 
-  const handleSearch = (event) => {
+  const handleSearch = async (event) => {
     event.preventDefault();
-    fetchGameSearch(query, API_BASE_URL, token, setGameData, setError);
+    setLoading(true); // Set loading to true when the search starts
+    await fetchGameSearch(query, API_BASE_URL, token, setGameData, setError);
+    setLoading(false); // Set loading to false when the search is complete
   };
 
   return (
@@ -45,7 +48,9 @@ const DiscoverGames = () => {
       <div className="game-results">
         <h1>Results:</h1>
         <div className="game-search-results">
-          {gameData ? (
+          {loading ? (
+            <p>Loading...</p> // Display this while loading
+          ) : gameData ? (
             <GameSearchCard game={gameData} />
           ) : (
             <p>No games found</p>
